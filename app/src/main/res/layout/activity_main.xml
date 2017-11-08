@@ -6,30 +6,36 @@
     android:layout_height="match_parent"
     tools:context="com.example.admin.guestimation.MainActivity">
 
-    <EditText
-        android:id="@+id/answerBox"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="77dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Answer"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="217dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/questionView"
-        android:layout_width="match_parent"
-        android:layout_height="198dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        <TextView
+            android:id="@+id/questionView"
+            android:layout_width="match_parent"
+            android:layout_height="198dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onSubmit"
-        android:text="Submit"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="294dp" />
+        <EditText
+            android:id="@+id/answerBox"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Answer"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="217dp" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSubmit"
+            android:text="Submit"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
