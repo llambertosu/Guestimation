@@ -1,6 +1,7 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -60,20 +61,86 @@ public class MainActivity extends AppCompatActivity {
                 checkSubmit.execute("");
             }
         });
+
+        submit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CheckSubmit checkSubmit = new CheckSubmit();
+                checkSubmit.execute("");
+            }
+        });
     }
 
-    public class CheckQuestion extends AsyncTask<String,String,String> {
+    public class CheckSubmit extends AsyncTask<String,String,String>
+    {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
 
         protected void onPreExecute() {
-            question.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String r) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            if (isSuccess)
+            {
+                Intent intent = new Intent(getApplicationContext(), Scoreboard.class);
+                startActivity(intent);
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    int submitAns;
+                    submitAns = Integer.parseInt(answer.getText().toString());
+                    String query = "update Player set Response = " + submitAns + " where Nickname='Mrusse' and GameID='XYZ1';"; //Need to change Nickname and GameID to allow use with Session variables
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(query);
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
+    public class CheckQuestion extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+            question.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String r)
+        {
             progressBar.setVisibility(View.GONE);
             question.setVisibility(View.VISIBLE);
             //Toast is the black oval that shows the result
@@ -81,15 +148,19 @@ public class MainActivity extends AppCompatActivity {
             //if isSuccess displays the question in a text view, if it exists or the internet connection is working
             if (isSuccess) {
                 question = (TextView) findViewById(R.id.questionView);
+                answer.setText("");
                 question.setText(name1);
             }
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            try {
+        protected String doInBackground(String... params)
+        {
+            try
+            {
                 con = connectionclass();
-                if (con == null) {
+                if (con == null)
+                {
                     z = "Check your internet access and try again!";
                 }
                 else
@@ -103,12 +174,16 @@ public class MainActivity extends AppCompatActivity {
                         z = name1;
                         isSuccess = true;
                         con.close();
-                    } else {
+                    }
+                    else
+                        {
                         z = "Error retrieving question";
                         isSuccess = false;
-                    }
+                        }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 isSuccess = false;
                 z = ex.getMessage();
 
