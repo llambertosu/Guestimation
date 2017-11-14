@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r) {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            question.setVisibility(View.VISIBLE);
+            //Toast is the black oval that shows the result
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //if isSuccess displays the question in a text view, if it exists or the internet connection is working
             if (isSuccess) {
                 question = (TextView) findViewById(R.id.questionView);
                 question.setText(name1);
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
-        String ConnectionURL = null;
+        String ConnectionURL;
         try
         {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
