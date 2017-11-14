@@ -18,6 +18,12 @@
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/answerBox"
             android:layout_width="match_parent"
@@ -35,7 +41,17 @@
             android:onClick="onSubmit"
             android:text="Submit"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="294dp" />
+            tools:layout_editor_absoluteY="294dp"
+            tools:ignore="OnClick" />
+
+        <Button
+            android:id="@+id/getQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onQuestion"
+            android:text="Get Question"
+            tools:ignore="OnClick" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
