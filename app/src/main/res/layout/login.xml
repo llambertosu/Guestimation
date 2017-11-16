@@ -10,48 +10,30 @@
         android:text="Join:"
         android:textSize="36sp" />
 
-    <LinearLayout
-        android:id="@+id/joinNickname"
+    <EditText
+        android:id="@+id/enterNickname"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nickname" />
 
-        <EditText
-            android:id="@+id/enterNickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Nickname" />
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/enterPassword"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Game Password" />
 
-        <EditText
-            android:id="@+id/enterPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Game Password" />
-    </LinearLayout>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onJoinLogin"
+        android:text="Login" />
 
-        <Button
-            android:id="@+id/enterSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onJoinLogin"
-            android:text="Login" />
-    </LinearLayout>
 </LinearLayout>
