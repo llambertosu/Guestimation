@@ -31,6 +31,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Game Password" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,5 +46,21 @@
             android:layout_weight="1"
             android:onClick="onHostGame"
             android:text="Submit" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
