@@ -61,6 +61,7 @@ public class Login extends AppCompatActivity {
     {
         String z = "";
         Boolean isSuccess = false;
+        String name1 ="";
 
         @Override
         protected void onPostExecute(String r) {
