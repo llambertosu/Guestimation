@@ -15,8 +15,14 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join:"
-            android:textSize="36sp" />
+            android:text="Enter your information below to join the game!"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/nicknameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nickname:" />
 
         <EditText
             android:id="@+id/enterNickname"
@@ -24,17 +30,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Nickname" />
-
+            android:inputType="textPersonName"/>
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Password:" />
         <EditText
             android:id="@+id/enterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Game Password" />
+            android:inputType="textPersonName"/>
 
         <Button
             android:id="@+id/loginButton"
