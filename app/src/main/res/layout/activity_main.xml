@@ -44,14 +44,6 @@
             tools:layout_editor_absoluteY="294dp"
             tools:ignore="OnClick" />
 
-        <Button
-            android:id="@+id/getQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onQuestion"
-            android:text="Get Question"
-            tools:ignore="OnClick" />
-
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

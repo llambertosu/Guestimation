@@ -28,26 +28,22 @@ public class MainActivity extends AppCompatActivity {
     public Button submit;
     public TextView question;
     public ProgressBar progressBar;
-    public Button getQuestion;
 
     //Declaring connection variables
     public Connection con;
     String un, pass, db, ip;
+    Integer deckID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent2 = getIntent();
-        String username = intent2.getStringExtra("username");
-        String gamePass = intent2.getStringExtra("gamePass");
 
         //Get values from the button, ExitText, and TextView
         answer = (EditText) findViewById(R.id.answerBox);
         submit = (Button) findViewById(R.id.submitButton);
         question = (TextView) findViewById(R.id.questionView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        getQuestion = (Button) findViewById(R.id.getQuestion);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -55,15 +51,11 @@ public class MainActivity extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
-        getQuestion.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckQuestion checkSubmit = new CheckQuestion();
-                checkSubmit.execute("");
-            }
-        });
+        CheckDeck checkDeck = new CheckDeck();
+        checkDeck.execute("");
+
+        CheckQuestion checkQuestion = new CheckQuestion();
+        checkQuestion.execute("");
 
         submit.setOnClickListener(new View.OnClickListener()
         {
@@ -85,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         Boolean isSuccess = false;
         String name1 = "";
 
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -95,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
-                Intent intent = new Intent(getApplicationContext(), Scoreboard.class);
+                Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 startActivity(intent);
             }
 
@@ -170,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
                     z = "Check your internet access and try again!";
                 }
                 else
-                    {
-                    String query = "select Question from Card where DeckID=1 and CardID=15"; //need to change the DeckID and CardID to be Session Variables
+                {
+                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=15"; //need to change the DeckID and CardID to be Session Variables
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
@@ -182,10 +175,10 @@ public class MainActivity extends AppCompatActivity {
                         con.close();
                     }
                     else
-                        {
+                    {
                         z = "Error retrieving question";
                         isSuccess = false;
-                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -193,6 +186,68 @@ public class MainActivity extends AppCompatActivity {
                 isSuccess = false;
                 z = ex.getMessage();
 
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
+    public class CheckDeck extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        Intent intent2 = getIntent();
+        String gamePass = intent2.getStringExtra("gamePass");
+
+        protected void onPreExecute()
+        {
+
+        }
+
+        @Override
+        protected void onPostExecute(String r)
+        {
+            if (isSuccess = true) {
+                deckID = Integer.parseInt(z);
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    String gamePassword = gamePass.toString();
+                    String query = "select DeckID from Game where GameID = '" + gamePassword + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if (rs.next())
+                    {
+                        name1 = rs.getString("DeckID");
+                        z = name1;
+                        isSuccess = true;
+                        con.close();
+                    }
+                    else
+                    {
+                        z = "Error retrieving question";
+                        isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
                 Log.d("sql error", z);
             }
             return z;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,6 +26,7 @@ public class UserLogin extends AppCompatActivity {
 
     public Connection con;
     String un, pass, db, ip;
+
 
 
     @Override
@@ -85,7 +87,7 @@ public class UserLogin extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "insert into Player (Nickname, GameID) values ('" + userNickname + "', '" + gamePassword + "')"; //Need to change Nickname and GameID to allow use with Session variables
+                    String query = "insert into Player (Nickname, GameID) values ('" + userNickname + "', '" + gamePassword + "')";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;

@@ -1,19 +1,13 @@
 package com.example.admin.guestimation;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-/**
- * Created by masonrussell on 11/14/17.
- */
-
-public class Scoreboard extends AppCompatActivity {
+public class ScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scoreboard);
-
+        setContentView(R.layout.activity_score);
     }
-
 }
