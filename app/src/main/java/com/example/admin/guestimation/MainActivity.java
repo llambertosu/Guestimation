@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent2 = getIntent();
+        String username = intent2.getStringExtra("username");
+        String gamePass = intent2.getStringExtra("gamePass");
 
         //Get values from the button, ExitText, and TextView
         answer = (EditText) findViewById(R.id.answerBox);
@@ -75,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
     public class CheckSubmit extends AsyncTask<String,String,String>
     {
+        Intent intent2 = getIntent();
+        String username = intent2.getStringExtra("username");
+        String gamePass = intent2.getStringExtra("gamePass");
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     int submitAns;
                     submitAns = Integer.parseInt(answer.getText().toString());
-                    String query = "update Player set Response = " + submitAns + " where Nickname='Mrusse' and GameID='XYZ1';"; //Need to change Nickname and GameID to allow use with Session variables
+                    String query = "update Player set Response = " + submitAns + " where Nickname='" + username + "' and GameID='" + gamePass + "';";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;

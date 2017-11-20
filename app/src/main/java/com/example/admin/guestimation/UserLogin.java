@@ -62,12 +62,11 @@ public class UserLogin extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String r) {
-            Toast.makeText(UserLogin.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
-                intent2.putExtra("username", nickname.toString());
-                intent2.putExtra("gamePass", gamePass.toString());
+                intent2.putExtra("username", nickname.getText().toString());
+                intent2.putExtra("gamePass", gamePass.getText().toString());
                 startActivity(intent2);
             }
         }
@@ -75,8 +74,8 @@ public class UserLogin extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params)
         {
-            String userNickname = nickname.toString();
-            String gamePassword = gamePass.toString();
+            String userNickname = nickname.getText().toString();
+            String gamePassword = gamePass.getText().toString();
             try
             {
                 con = connectionclass();
