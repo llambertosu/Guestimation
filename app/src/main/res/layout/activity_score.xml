@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.guestimation.scoreActivity">
+    tools:context="com.example.admin.guestimation.ScoreActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,10 +22,15 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="150dp"
             android:text="TextView"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="253dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Button" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

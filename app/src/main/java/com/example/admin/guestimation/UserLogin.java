@@ -69,6 +69,7 @@ public class UserLogin extends AppCompatActivity {
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gamePass.getText().toString());
+                intent2.putExtra("nextCard", "0");
                 startActivity(intent2);
             }
         }

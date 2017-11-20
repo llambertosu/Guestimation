@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,13 +34,31 @@ public class MainActivity extends AppCompatActivity {
 
     //Declaring connection variables
     public Connection con;
-    String un, pass, db, ip;
-    Integer deckID;
+    String un, pass, db, ip, username, gamePass;
+    Integer deckID, nextCard;
+    int[] cards = new int[10];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try
+        {
+            Intent intent = getIntent();
+            nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
+            username = intent.getStringExtra("username");
+            gamePass = intent.getStringExtra("gamePass");
+            if (nextCard != 0)
+            {
+                cards = intent.getIntArrayExtra("cards");
+            }
+        }
+        catch(Exception ex)
+        {
+
+        }
 
         //Get values from the button, ExitText, and TextView
         answer = (EditText) findViewById(R.id.answerBox);
@@ -53,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         CheckDeck checkDeck = new CheckDeck();
         checkDeck.execute("");
+
+        GetCards getCards = new GetCards();
+        getCards.execute("");
 
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
@@ -70,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
     public class CheckSubmit extends AsyncTask<String,String,String>
     {
-        Intent intent2 = getIntent();
-        String username = intent2.getStringExtra("username");
-        String gamePass = intent2.getStringExtra("gamePass");
+        //Intent intent2 = getIntent();
+        //String username = intent2.getStringExtra("username");
+        //String gamePass = intent2.getStringExtra("gamePass");
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
@@ -85,10 +109,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r) {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("gamePass", gamePass);
+                intent.putExtra("cards", cards);
+                intent.putExtra("nextCard", nextCard);
                 startActivity(intent);
             }
 
@@ -131,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
         Boolean isSuccess = false;
         String name1 = "";
 
+        int whichCard = nextCard;
+
         protected void onPreExecute()
         {
             question.setVisibility(View.INVISIBLE);
@@ -143,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             question.setVisibility(View.VISIBLE);
             //Toast is the black oval that shows the result
-            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this, nextCard.toString(), Toast.LENGTH_LONG).show();
             //if isSuccess displays the question in a text view, if it exists or the internet connection is working
             if (isSuccess) {
                 question = (TextView) findViewById(R.id.questionView);
@@ -164,7 +194,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=15"; //need to change the DeckID and CardID to be Session Variables
+                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[whichCard];
+                    whichCard += 1;
+                    nextCard = whichCard;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
@@ -209,7 +241,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            if (isSuccess = true) {
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            if (isSuccess = true)
+            {
                 deckID = Integer.parseInt(z);
             }
         }
@@ -241,6 +275,59 @@ public class MainActivity extends AppCompatActivity {
                     {
                         z = "Error retrieving question";
                         isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
+    public class GetCards extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+        }
+
+        @Override
+        protected void onPostExecute (String r)
+        {
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    int counter = 0;
+                    String query = "select CardID from Card where DeckID =" + deckID;
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    while (rs.next())
+                    {
+                        name1 = rs.getString("CardID");
+                        z = name1;
+                        cards[counter] = Integer.parseInt(z);
+                        counter += 1;
+                        isSuccess = true;
+                        con.close();
                     }
                 }
             }
