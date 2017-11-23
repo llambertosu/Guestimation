@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -25,13 +27,19 @@ public class ScoreActivity extends AppCompatActivity {
 
     public Connection con;
 
+    public TextView textView, textView3;
+
     String username, gamePass, nextCard;
-    String[] responses;
+    String[] responses = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        textView = (TextView) findViewById(R.id.textView);
+        textView3 = (TextView) findViewById(R.id.textView3);
+
 
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
@@ -40,9 +48,14 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void run ()
             {
-
+                Intent backtoMain = new Intent(ScoreActivity.this, MainActivity.class);
+                backtoMain.putExtra("username", username);
+                backtoMain.putExtra("gamePass", gamePass);
+                backtoMain.putExtra("nextCard", nextCard);
+                startActivity(backtoMain);
             }
         }, DISPLAY_LENGTH);*/
+
     }
 
     public class CheckAnswers extends AsyncTask<String,String,String>
@@ -62,7 +75,7 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-
+            textView.setText(Arrays.toString(responses));
         }
 
         @Override
@@ -88,8 +101,8 @@ public class ScoreActivity extends AppCompatActivity {
                         responses[counter] = z;
                         counter += 1;
                         isSuccess = true;
-                        con.close();
                     }
+                    con.close();
                 }
             }
             catch (Exception ex)
