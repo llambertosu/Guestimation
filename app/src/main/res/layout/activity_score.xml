@@ -14,23 +14,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="6dp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="253dp" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="Button" />
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

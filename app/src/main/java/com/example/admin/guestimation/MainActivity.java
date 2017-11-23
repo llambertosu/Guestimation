@@ -44,21 +44,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try
-        {
-            Intent intent = getIntent();
-            nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
-            username = intent.getStringExtra("username");
-            gamePass = intent.getStringExtra("gamePass");
-            if (nextCard != 0)
-            {
-                cards = intent.getIntArrayExtra("cards");
-            }
-        }
-        catch(Exception ex)
-        {
-
-        }
+        Intent intent = getIntent();
+        nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
+        username = intent.getStringExtra("username");
+        gamePass = intent.getStringExtra("gamePass");
 
         //Get values from the button, ExitText, and TextView
         answer = (EditText) findViewById(R.id.answerBox);
@@ -112,12 +101,11 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
-                Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("gamePass", gamePass);
-                intent.putExtra("cards", cards);
-                intent.putExtra("nextCard", nextCard);
-                startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("gamePass", gamePass);
+                    intent.putExtra("nextCard", nextCard);
+                    startActivity(intent);
             }
 
         }
