@@ -27,19 +27,58 @@ public class ScoreActivity extends AppCompatActivity {
 
     public Connection con;
 
-    public TextView textView, textView3;
+    public TextView userResponse1, userResponse2, userResponse3, userResponse4, userResponse5, userResponse6, userResponse7, userResponse8, userResponse9,userResponse10;
+    public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
 
     String username, gamePass, nextCard;
     String[] responses = new String[10];
+    String[] players = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        textView = (TextView) findViewById(R.id.textView);
-        textView3 = (TextView) findViewById(R.id.textView3);
-
+        userResponse1 = (TextView) findViewById(R.id.userResponse1);
+        userResponse2 = (TextView) findViewById(R.id.userResponse2);
+        userResponse3 = (TextView) findViewById(R.id.userResponse3);
+        userResponse4 = (TextView) findViewById(R.id.userResponse4);
+        userResponse5 = (TextView) findViewById(R.id.userResponse5);
+        userResponse6 = (TextView) findViewById(R.id.userResponse6);
+        userResponse7 = (TextView) findViewById(R.id.userResponse7);
+        userResponse8 = (TextView) findViewById(R.id.userResponse8);
+        userResponse9 = (TextView) findViewById(R.id.userResponse9);
+        userResponse10 = (TextView) findViewById(R.id.userResponse10);
+        userResponse1.setVisibility(View.INVISIBLE);
+        userResponse2.setVisibility(View.INVISIBLE);
+        userResponse3.setVisibility(View.INVISIBLE);
+        userResponse4.setVisibility(View.INVISIBLE);
+        userResponse5.setVisibility(View.INVISIBLE);
+        userResponse6.setVisibility(View.INVISIBLE);
+        userResponse7.setVisibility(View.INVISIBLE);
+        userResponse8.setVisibility(View.INVISIBLE);
+        userResponse9.setVisibility(View.INVISIBLE);
+        userResponse10.setVisibility(View.INVISIBLE);
+        response1 = (TextView) findViewById(R.id.response1);
+        response2 = (TextView) findViewById(R.id.response2);
+        response3 = (TextView) findViewById(R.id.response3);
+        response4 = (TextView) findViewById(R.id.response4);
+        response5 = (TextView) findViewById(R.id.response5);
+        response6 = (TextView) findViewById(R.id.response6);
+        response7 = (TextView) findViewById(R.id.response7);
+        response8 = (TextView) findViewById(R.id.response8);
+        response9 = (TextView) findViewById(R.id.response9);
+        response10 = (TextView) findViewById(R.id.response10);
+        response1.setVisibility(View.INVISIBLE);
+        response2.setVisibility(View.INVISIBLE);
+        response3.setVisibility(View.INVISIBLE);
+        response4.setVisibility(View.INVISIBLE);
+        response5.setVisibility(View.INVISIBLE);
+        response6.setVisibility(View.INVISIBLE);
+        response7.setVisibility(View.INVISIBLE);
+        response8.setVisibility(View.INVISIBLE);
+        response9.setVisibility(View.INVISIBLE);
+        response10.setVisibility(View.INVISIBLE);
 
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
@@ -75,7 +114,256 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            textView.setText(Arrays.toString(responses));
+            if (players[9] != null && responses[9] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                userResponse6.setText(players[5]);
+                userResponse7.setText(players[6]);
+                userResponse8.setText(players[7]);
+                userResponse9.setText(players[8]);
+                userResponse10.setText(players[9]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                response6.setText(responses[5]);
+                response7.setText(responses[6]);
+                response8.setText(responses[7]);
+                response9.setText(responses[8]);
+                response10.setText(responses[9]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                userResponse6.setVisibility(View.VISIBLE);
+                userResponse7.setVisibility(View.VISIBLE);
+                userResponse8.setVisibility(View.VISIBLE);
+                userResponse9.setVisibility(View.VISIBLE);
+                userResponse10.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+                response6.setVisibility(View.VISIBLE);
+                response7.setVisibility(View.VISIBLE);
+                response8.setVisibility(View.VISIBLE);
+                response9.setVisibility(View.VISIBLE);
+                response10.setVisibility(View.VISIBLE);
+            }
+            else if (players[8] != null && responses[8] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                userResponse6.setText(players[5]);
+                userResponse7.setText(players[6]);
+                userResponse8.setText(players[7]);
+                userResponse9.setText(players[8]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                response6.setText(responses[5]);
+                response7.setText(responses[6]);
+                response8.setText(responses[7]);
+                response9.setText(responses[8]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                userResponse6.setVisibility(View.VISIBLE);
+                userResponse7.setVisibility(View.VISIBLE);
+                userResponse8.setVisibility(View.VISIBLE);
+                userResponse9.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+                response6.setVisibility(View.VISIBLE);
+                response7.setVisibility(View.VISIBLE);
+                response8.setVisibility(View.VISIBLE);
+                response9.setVisibility(View.VISIBLE);
+            }
+            else if (players[7] != null && responses[7] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                userResponse6.setText(players[5]);
+                userResponse7.setText(players[6]);
+                userResponse8.setText(players[7]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                response6.setText(responses[5]);
+                response7.setText(responses[6]);
+                response8.setText(responses[7]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                userResponse6.setVisibility(View.VISIBLE);
+                userResponse7.setVisibility(View.VISIBLE);
+                userResponse8.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+                response6.setVisibility(View.VISIBLE);
+                response7.setVisibility(View.VISIBLE);
+                response8.setVisibility(View.VISIBLE);
+            }
+            else if (players[6] != null && responses[6] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                userResponse6.setText(players[5]);
+                userResponse7.setText(players[6]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                response6.setText(responses[5]);
+                response7.setText(responses[6]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                userResponse6.setVisibility(View.VISIBLE);
+                userResponse7.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+                response6.setVisibility(View.VISIBLE);
+                response7.setVisibility(View.VISIBLE);
+            }
+            else if (players[5] != null && responses[5] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                userResponse6.setText(players[5]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                response6.setText(responses[5]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                userResponse6.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+                response6.setVisibility(View.VISIBLE);
+            }
+            else if (players[4] != null && responses[4] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                userResponse5.setText(players[4]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                response5.setText(responses[4]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                userResponse5.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+                response5.setVisibility(View.VISIBLE);
+            }
+            else if (players[3] != null && responses[3] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                userResponse4.setText(players[3]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                response4.setText(responses[3]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                userResponse4.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+                response4.setVisibility(View.VISIBLE);
+            }
+            else if (players[2] != null && responses[2] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                userResponse3.setText(players[2]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                response3.setText(responses[2]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                userResponse3.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+                response3.setVisibility(View.VISIBLE);
+            }
+            else if (players[1] != null && responses[1] != null)
+            {
+                userResponse1.setText(players[0]);
+                userResponse2.setText(players[1]);
+                response1.setText(responses[0]);
+                response2.setText(responses[1]);
+                userResponse1.setVisibility(View.VISIBLE);
+                userResponse2.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+                response2.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                userResponse1.setText(players[0]);
+                response1.setText(responses[0]);
+                userResponse1.setVisibility(View.VISIBLE);
+                response1.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
@@ -91,14 +379,16 @@ public class ScoreActivity extends AppCompatActivity {
                 else
                 {
                     int counter = 0;
-                    String query = "select Response from Player where GameID='" + gamePass + "'";
+                    String query = "select Response, Nickname from Player where GameID='" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next())
                     {
                         name1 = rs.getString("Response");
+                        String name2 = rs.getString("Nickname");
                         z= name1;
                         responses[counter] = z;
+                        players[counter] = name2;
                         counter += 1;
                         isSuccess = true;
                     }
