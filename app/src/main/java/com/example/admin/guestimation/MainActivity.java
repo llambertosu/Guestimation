@@ -101,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
-                    Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("gamePass", gamePass);
-                    intent.putExtra("nextCard", nextCard);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("gamePass", gamePass);
+                intent.putExtra("nextCard", nextCard);
+                startActivity(intent);
             }
 
         }

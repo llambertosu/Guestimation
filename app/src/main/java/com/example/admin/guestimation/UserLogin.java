@@ -88,7 +88,7 @@ public class UserLogin extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "insert into Player (Nickname, GameID, Score) values ('" + userNickname + "', '" + gamePassword + ", 0')";
+                    String query = "insert into Player (Nickname, GameID, Score) values ('" + userNickname + "', '" + gamePassword + "', 0)";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;

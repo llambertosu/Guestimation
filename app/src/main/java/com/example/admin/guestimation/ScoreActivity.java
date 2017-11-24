@@ -1,6 +1,7 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -30,6 +31,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView userResponse1, userResponse2, userResponse3, userResponse4, userResponse5, userResponse6, userResponse7, userResponse8, userResponse9,userResponse10;
     public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
+    public Button back;
 
     String username, gamePass, nextCard;
     String[] responses = new String[10];
@@ -41,6 +43,7 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        back = (Button) findViewById(R.id.button);
         score1 = (TextView) findViewById(R.id.score1);
         score2 = (TextView) findViewById(R.id.score2);
         score3 = (TextView) findViewById(R.id.score3);
@@ -105,6 +108,17 @@ public class ScoreActivity extends AppCompatActivity {
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+            Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
+            backToMain.putExtra("username", username);
+            backToMain.putExtra("gamePass", gamePass);
+            backToMain.putExtra("nextCard", nextCard);
+            startActivity(backToMain);
+            }
+        });
        /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run ()
