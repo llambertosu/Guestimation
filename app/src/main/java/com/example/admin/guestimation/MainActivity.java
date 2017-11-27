@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +25,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Setting values to log in for the database
         Intent intent = getIntent();
         nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
         username = intent.getStringExtra("username");
@@ -357,6 +363,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return connection;
     }
+
+
 
 
 }

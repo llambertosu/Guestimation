@@ -45,6 +45,9 @@ public class UserLogin extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
+        /*Are we supposed to be INSERT'ing or pulling from
+        the db and comparing values? line 94.
+         */
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
