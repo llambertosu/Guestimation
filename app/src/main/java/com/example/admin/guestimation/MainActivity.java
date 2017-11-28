@@ -1,11 +1,9 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
-import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,19 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.security.PublicKey;
-import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         gamePass = intent.getStringExtra("gamePass");
 
         //Get values from the button, ExitText, and TextView
-        answer = (EditText) findViewById(R.id.answerBox);
-        submit = (Button) findViewById(R.id.submitButton);
-        question = (TextView) findViewById(R.id.questionView);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        answer = findViewById(R.id.answerBox);
+        submit = findViewById(R.id.submitButton);
+        question = findViewById(R.id.questionView);
+        progressBar = findViewById(R.id.progressBar);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -120,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
-                //closes the MainActivity so it can be Hreused later
+                //closes the MainActivity so it can be reused later
                 finish();
                 startActivity(intent);
             }
@@ -264,9 +254,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String gamePassword = gamePass.toString();
                     //pulls the DeckID for use with questions
-                    String query = "select DeckID from Game where GameID = '" + gamePassword + "'";
+                    String query = "select DeckID from Game where GameID = '" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
@@ -404,11 +393,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //updates the cardToPlay table in the database for each user
     public class UpdateCard extends AsyncTask<String,String,String>
     {
-        //Intent intent2 = getIntent();
-        //String username = intent2.getStringExtra("username");
-        //String gamePass = intent2.getStringExtra("gamePass");
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
@@ -461,7 +448,6 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            //your database connection string goes below
             ConnectionURL = "jdbc:jtds:sqlserver://guestimation.database.windows.net:1433;DatabaseName=guestimation;user=user@guestimation;password=Cowboys2017;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             connection = DriverManager.getConnection(ConnectionURL);
         }

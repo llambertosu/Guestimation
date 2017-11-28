@@ -6,24 +6,19 @@ import android.support.v7.app.AppCompatActivity;
  * Created by admin on 11/27/17.
  */
 
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Locale;
@@ -49,9 +44,9 @@ public class HostGame extends AppCompatActivity {
         setContentView(R.layout.activity_host_game);
 
         //Get values from the button, ExitText, and TextView
-        nickname = (EditText) findViewById(R.id.enterNickname);
-        gamePass = (EditText) findViewById(R.id.enterPassword);
-        loginButton = (Button) findViewById(R.id.loginButton);
+        nickname = findViewById(R.id.enterNickname);
+        gamePass = findViewById(R.id.enterPassword);
+        loginButton = findViewById(R.id.loginButton);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -59,8 +54,10 @@ public class HostGame extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
-        _screen =(TextView) findViewById(R.id.viewGameKey);
+        _screen = findViewById(R.id.viewGameKey);
         _screen.setText(display);
+
+
 
     }
 

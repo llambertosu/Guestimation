@@ -11,11 +11,8 @@ import android.widget.Button;
  */
 
 public class Homepage extends AppCompatActivity{
-    //Not sure if this is where this class needs to be,
-    //but it is the random number generator for the gamekey.
 
     public Button onHostPressed, joinButton;
-
 
     @Override
     public void onCreate (Bundle savedInstanceState){

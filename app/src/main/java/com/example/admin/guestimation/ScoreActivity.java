@@ -1,7 +1,6 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -12,15 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -33,7 +28,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
     public Button back;
 
-    String username, gamePass, nextCard;
+    String username, gamePass;
     //sets arrays for displaying responses, usernames, and scores
     String[] responses = new String[10];
     String[] players = new String[10];
@@ -44,17 +39,17 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        back = (Button) findViewById(R.id.button);
-        score1 = (TextView) findViewById(R.id.score1);
-        score2 = (TextView) findViewById(R.id.score2);
-        score3 = (TextView) findViewById(R.id.score3);
-        score4 = (TextView) findViewById(R.id.score4);
-        score5 = (TextView) findViewById(R.id.score5);
-        score6 = (TextView) findViewById(R.id.score6);
-        score7 = (TextView) findViewById(R.id.score7);
-        score8 = (TextView) findViewById(R.id.score8);
-        score9 = (TextView) findViewById(R.id.score9);
-        score10 = (TextView) findViewById(R.id.score10);
+        back = findViewById(R.id.button);
+        score1 = findViewById(R.id.score1);
+        score2 = findViewById(R.id.score2);
+        score3 = findViewById(R.id.score3);
+        score4 = findViewById(R.id.score4);
+        score5 = findViewById(R.id.score5);
+        score6 = findViewById(R.id.score6);
+        score7 = findViewById(R.id.score7);
+        score8 = findViewById(R.id.score8);
+        score9 = findViewById(R.id.score9);
+        score10 = findViewById(R.id.score10);
         score1.setVisibility(View.INVISIBLE);
         score2.setVisibility(View.INVISIBLE);
         score3.setVisibility(View.INVISIBLE);
@@ -65,16 +60,16 @@ public class ScoreActivity extends AppCompatActivity {
         score8.setVisibility(View.INVISIBLE);
         score9.setVisibility(View.INVISIBLE);
         score10.setVisibility(View.INVISIBLE);
-        userResponse1 = (TextView) findViewById(R.id.userResponse1);
-        userResponse2 = (TextView) findViewById(R.id.userResponse2);
-        userResponse3 = (TextView) findViewById(R.id.userResponse3);
-        userResponse4 = (TextView) findViewById(R.id.userResponse4);
-        userResponse5 = (TextView) findViewById(R.id.userResponse5);
-        userResponse6 = (TextView) findViewById(R.id.userResponse6);
-        userResponse7 = (TextView) findViewById(R.id.userResponse7);
-        userResponse8 = (TextView) findViewById(R.id.userResponse8);
-        userResponse9 = (TextView) findViewById(R.id.userResponse9);
-        userResponse10 = (TextView) findViewById(R.id.userResponse10);
+        userResponse1 = findViewById(R.id.userResponse1);
+        userResponse2 = findViewById(R.id.userResponse2);
+        userResponse3 = findViewById(R.id.userResponse3);
+        userResponse4 = findViewById(R.id.userResponse4);
+        userResponse5 = findViewById(R.id.userResponse5);
+        userResponse6 = findViewById(R.id.userResponse6);
+        userResponse7 = findViewById(R.id.userResponse7);
+        userResponse8 = findViewById(R.id.userResponse8);
+        userResponse9 = findViewById(R.id.userResponse9);
+        userResponse10 = findViewById(R.id.userResponse10);
         userResponse1.setVisibility(View.INVISIBLE);
         userResponse2.setVisibility(View.INVISIBLE);
         userResponse3.setVisibility(View.INVISIBLE);
@@ -85,16 +80,16 @@ public class ScoreActivity extends AppCompatActivity {
         userResponse8.setVisibility(View.INVISIBLE);
         userResponse9.setVisibility(View.INVISIBLE);
         userResponse10.setVisibility(View.INVISIBLE);
-        response1 = (TextView) findViewById(R.id.response1);
-        response2 = (TextView) findViewById(R.id.response2);
-        response3 = (TextView) findViewById(R.id.response3);
-        response4 = (TextView) findViewById(R.id.response4);
-        response5 = (TextView) findViewById(R.id.response5);
-        response6 = (TextView) findViewById(R.id.response6);
-        response7 = (TextView) findViewById(R.id.response7);
-        response8 = (TextView) findViewById(R.id.response8);
-        response9 = (TextView) findViewById(R.id.response9);
-        response10 = (TextView) findViewById(R.id.response10);
+        response1 = findViewById(R.id.response1);
+        response2 = findViewById(R.id.response2);
+        response3 = findViewById(R.id.response3);
+        response4 = findViewById(R.id.response4);
+        response5 = findViewById(R.id.response5);
+        response6 = findViewById(R.id.response6);
+        response7 = findViewById(R.id.response7);
+        response8 = findViewById(R.id.response8);
+        response9 = findViewById(R.id.response9);
+        response10 = findViewById(R.id.response10);
         response1.setVisibility(View.INVISIBLE);
         response2.setVisibility(View.INVISIBLE);
         response3.setVisibility(View.INVISIBLE);
@@ -110,7 +105,7 @@ public class ScoreActivity extends AppCompatActivity {
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
 
-        back.setOnClickListener(new View.OnClickListener() {
+        /*back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -122,17 +117,18 @@ public class ScoreActivity extends AppCompatActivity {
                 finish();
                 startActivity(backToMain);
             }
-        });
-       /* new Handler().postDelayed(new Runnable() {
+        });*/
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run ()
             {
                 Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
                 backtoMain.putExtra("username", username);
                 backtoMain.putExtra("gamePass", gamePass);
+                finish();
                 startActivity(backtoMain);
             }
-        }, DISPLAY_LENGTH);*/
+        }, DISPLAY_LENGTH);
 
     }
 
@@ -206,16 +202,16 @@ public class ScoreActivity extends AppCompatActivity {
                 score8.setVisibility(View.VISIBLE);
                 score9.setVisibility(View.VISIBLE);
                 score10.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
-                score6.setText(scores[5].toString());
-                score7.setText(scores[6].toString());
-                score8.setText(scores[7].toString());
-                score9.setText(scores[8].toString());
-                score10.setText(scores[9].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
+                score6.setText(scores[5]);
+                score7.setText(scores[6]);
+                score8.setText(scores[7]);
+                score9.setText(scores[8]);
+                score10.setText(scores[9]);
             }
             else if (players[8] != null && responses[8] != null)
             {
@@ -264,15 +260,15 @@ public class ScoreActivity extends AppCompatActivity {
                 score7.setVisibility(View.VISIBLE);
                 score8.setVisibility(View.VISIBLE);
                 score9.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
-                score6.setText(scores[5].toString());
-                score7.setText(scores[6].toString());
-                score8.setText(scores[7].toString());
-                score9.setText(scores[8].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
+                score6.setText(scores[5]);
+                score7.setText(scores[6]);
+                score8.setText(scores[7]);
+                score9.setText(scores[8]);
             }
             else if (players[7] != null && responses[7] != null)
             {
@@ -316,14 +312,14 @@ public class ScoreActivity extends AppCompatActivity {
                 score6.setVisibility(View.VISIBLE);
                 score7.setVisibility(View.VISIBLE);
                 score8.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
-                score6.setText(scores[5].toString());
-                score7.setText(scores[6].toString());
-                score8.setText(scores[7].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
+                score6.setText(scores[5]);
+                score7.setText(scores[6]);
+                score8.setText(scores[7]);
             }
             else if (players[6] != null && responses[6] != null)
             {
@@ -362,13 +358,13 @@ public class ScoreActivity extends AppCompatActivity {
                 score5.setVisibility(View.VISIBLE);
                 score6.setVisibility(View.VISIBLE);
                 score7.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
-                score6.setText(scores[5].toString());
-                score7.setText(scores[6].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
+                score6.setText(scores[5]);
+                score7.setText(scores[6]);
             }
             else if (players[5] != null && responses[5] != null)
             {
@@ -396,12 +392,12 @@ public class ScoreActivity extends AppCompatActivity {
                 response4.setVisibility(View.VISIBLE);
                 response5.setVisibility(View.VISIBLE);
                 response6.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
-                score6.setText(scores[5].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
+                score6.setText(scores[5]);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -431,11 +427,11 @@ public class ScoreActivity extends AppCompatActivity {
                 response3.setVisibility(View.VISIBLE);
                 response4.setVisibility(View.VISIBLE);
                 response5.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
-                score5.setText(scores[4].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
+                score5.setText(scores[4]);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -460,10 +456,10 @@ public class ScoreActivity extends AppCompatActivity {
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
                 response4.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
-                score4.setText(scores[3].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
+                score4.setText(scores[3]);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -483,9 +479,9 @@ public class ScoreActivity extends AppCompatActivity {
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
-                score3.setText(scores[2].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
+                score3.setText(scores[2]);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -500,8 +496,8 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse2.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
-                score2.setText(scores[1].toString());
+                score1.setText(scores[0]);
+                score2.setText(scores[1]);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
             }

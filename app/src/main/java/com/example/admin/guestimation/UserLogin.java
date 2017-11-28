@@ -35,9 +35,9 @@ public class UserLogin extends AppCompatActivity {
         setContentView(R.layout.activity_user_login);
 
         //Get values from the button, ExitText, and TextView
-        nickname = (EditText) findViewById(R.id.enterNickname);
-        gamePass = (EditText) findViewById(R.id.enterPassword);
-        loginButton = (Button) findViewById(R.id.loginButton);
+        nickname = findViewById(R.id.enterNickname);
+        gamePass = findViewById(R.id.enterPassword);
+        loginButton = findViewById(R.id.loginButton);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -77,6 +77,10 @@ public class UserLogin extends AppCompatActivity {
                 intent2.putExtra("gamePass", gamePass.getText().toString());
                 startActivity(intent2);
             }
+            else
+            {
+                Toast.makeText(UserLogin.this, r, Toast.LENGTH_LONG).show();
+            }
         }
 
         @Override
@@ -102,7 +106,7 @@ public class UserLogin extends AppCompatActivity {
             catch (Exception ex)
             {
                 isSuccess = false;
-                z = ex.getMessage();
+                z = "Username taken or invalid game password, please ask your host or try another username";
 
                 Log.d("sql error", z);
             }
