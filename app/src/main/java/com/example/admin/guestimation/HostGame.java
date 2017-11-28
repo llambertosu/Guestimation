@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.security.SecureRandom;
@@ -34,6 +35,8 @@ public class HostGame extends AppCompatActivity {
     public EditText nickname;
     public EditText gamePass;
     public Button loginButton;
+    private TextView _screen;
+    private String display ="";
 
     public Connection con;
     String un, pass, db, ip;
@@ -56,11 +59,16 @@ public class HostGame extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
-        /*Are we supposed to be INSERT'ing or pulling from
-        the db and comparing values? line 94.
-         */
+        _screen =(TextView) findViewById(R.id.viewGameKey);
+        _screen.setText(display);
 
     }
+
+    private void updateScreen () {
+        _screen.setText(display);
+    }
+
+
 
     public class CheckLogin extends AsyncTask<String,String,String>
     {
@@ -198,7 +206,14 @@ public class HostGame extends AppCompatActivity {
 
     public void onGameKeyPressed (View v) {
         RandomString gameKey = new RandomString();
+        if (display == "") return;
+        display += gameKey;
+        updateScreen();
+    }
 
+    public void onClickBack (View v) {
+        Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        startActivity(intent);
     }
 }
 
