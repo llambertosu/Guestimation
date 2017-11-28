@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Guestimation</string>
     <string name="answer">Answer</string>
+    <string name="get_game_key">Get Game Key</string>
+    <string name="button">Button</string>
+    <string name="back">Back</string>
 </resources>
