@@ -206,7 +206,6 @@ public class HostGame extends AppCompatActivity {
 
     public void onGameKeyPressed (View v) {
         RandomString gameKey = new RandomString();
-        if (display == "") return;
         display += gameKey;
         updateScreen();
     }
