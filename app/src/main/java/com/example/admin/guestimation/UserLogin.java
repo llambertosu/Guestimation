@@ -53,12 +53,14 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                //calls the CheckLogin class
                 UserLogin.CheckLogin checkLogin = new UserLogin.CheckLogin();
                 checkLogin.execute("");
             }
         });
     }
 
+    //creates the player in the database with entered gamePass
     public class CheckLogin extends AsyncTask<String,String,String>
     {
         String z = "";
@@ -69,6 +71,7 @@ public class UserLogin extends AppCompatActivity {
         protected void onPostExecute(String r) {
             if (isSuccess)
             {
+                //starts the MainActivity intent and passes in speciifed variables
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gamePass.getText().toString());
