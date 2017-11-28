@@ -116,6 +116,7 @@ public class ScoreActivity extends AppCompatActivity {
             backToMain.putExtra("username", username);
             backToMain.putExtra("gamePass", gamePass);
             backToMain.putExtra("nextCard", nextCard);
+            finish();
             startActivity(backToMain);
             }
         });

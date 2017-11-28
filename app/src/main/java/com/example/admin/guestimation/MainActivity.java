@@ -105,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
+                String passCard = nextCard.toString();
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
-                intent.putExtra("nextCard", nextCard);
+                intent.putExtra("nextCard", passCard);
+                finish();
                 startActivity(intent);
             }
 
@@ -151,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
         Boolean isSuccess = false;
         String name1 = "";
 
-        int whichCard = nextCard;
-
         protected void onPreExecute()
         {
             question.setVisibility(View.INVISIBLE);
@@ -186,9 +186,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[whichCard];
-                    whichCard += 1;
-                    nextCard = whichCard;
+                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[nextCard];
+                    nextCard += 1;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
