@@ -39,7 +39,6 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        back = findViewById(R.id.button);
         score1 = findViewById(R.id.score1);
         score2 = findViewById(R.id.score2);
         score3 = findViewById(R.id.score3);
@@ -507,7 +506,7 @@ public class ScoreActivity extends AppCompatActivity {
                 response1.setText(responses[0]);
                 userResponse1.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
-                score1.setText(scores[0].toString());
+                score1.setText(scores[0]);
                 score1.setVisibility(View.VISIBLE);
             }
         }
