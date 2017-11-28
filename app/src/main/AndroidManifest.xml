@@ -24,6 +24,7 @@
         <activity android:name=".HostGame"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".ScoreActivity"/>
+
     </application>
 
 </manifest>
