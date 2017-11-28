@@ -30,7 +30,7 @@
             android:layout_height="77dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Answer"
+            android:text="@string/answer"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="217dp" />
 

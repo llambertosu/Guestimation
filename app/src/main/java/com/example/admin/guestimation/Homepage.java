@@ -18,6 +18,9 @@ public class Homepage extends AppCompatActivity{
     //Not sure if this is where this class needs to be,
     //but it is the random number generator for the gamekey.
 
+
+    public Button hostButton;
+
     public static class RandomString {
 
         /**
@@ -81,6 +84,6 @@ public class Homepage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
 
-        Button hostGame = (Button) findViewById(R.id.hostButton);
+        hostButton = (Button) findViewById(R.id.hostButton);
     }
 }
