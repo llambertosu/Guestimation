@@ -83,7 +83,6 @@ public class HostGame extends AppCompatActivity {
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gamePass.getText().toString());
-                intent2.putExtra("nextCard", "0");
                 startActivity(intent2);
             }
         }
@@ -102,7 +101,7 @@ public class HostGame extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "insert into Player (Nickname, GameID, Score) values ('" + userNickname + "', '" + gamePassword + "', 0)";
+                    String query = "insert into Player (Nickname, GameID, Score, cardToPlay) values ('" + userNickname + "', '" + gamePassword + "', 0, 0)";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;

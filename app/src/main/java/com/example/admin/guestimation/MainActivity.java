@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Getting values to log in for the database
         Intent intent = getIntent();
-        nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
         username = intent.getStringExtra("username");
         gamePass = intent.getStringExtra("gamePass");
 
@@ -64,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         db = "guestimation";
         un = "user";
         pass = "Cowboys2017";
+
+        //calls the CheckCard method in order to determine which card should be pulled
+        CheckCard checkCard = new CheckCard();
+        checkCard.execute("");
 
         //calls the CheckDeck method
         CheckDeck checkDeck = new CheckDeck();
@@ -110,13 +113,14 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
+                UpdateCard updateCard = new UpdateCard();
+                updateCard.execute("");
                 //Creates the intent to pass variables to the ScoreActivity class
                 String passCard = nextCard.toString();
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
-                intent.putExtra("nextCard", passCard);
-                //closes the MainActivity so it can be reused later
+                //closes the MainActivity so it can be Hreused later
                 finish();
                 startActivity(intent);
             }
@@ -329,8 +333,8 @@ public class MainActivity extends AppCompatActivity {
                         cards[counter] = Integer.parseInt(z);
                         counter += 1;
                         isSuccess = true;
-                        con.close();
                     }
+                    con.close();
                 }
             }
             catch (Exception ex)
@@ -342,6 +346,110 @@ public class MainActivity extends AppCompatActivity {
             return z;
         }
     }
+
+    //get the array index
+    public class CheckCard extends AsyncTask<String,String,String>
+    {
+        //Intent intent2 = getIntent();
+        //String username = intent2.getStringExtra("username");
+        //String gamePass = intent2.getStringExtra("gamePass");
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    String query = "select cardToPlay from Player where nickname='" + username + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if (rs.next())
+                    {
+                        nextCard = rs.getInt("cardToPlay");
+                        isSuccess = true;
+                        con.close();
+                    }
+                    else
+                    {
+                        z = "Error retrieving question";
+                        isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
+    public class UpdateCard extends AsyncTask<String,String,String>
+    {
+        //Intent intent2 = getIntent();
+        //String username = intent2.getStringExtra("username");
+        //String gamePass = intent2.getStringExtra("gamePass");
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    String query = "update Player set cardToPlay = " + nextCard + " where Nickname='" + username + "' and GameID='" + gamePass + "';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(query);
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
 
     @SuppressLint("NewApi")
     public Connection connectionclass()

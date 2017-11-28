@@ -118,7 +118,6 @@ public class ScoreActivity extends AppCompatActivity {
                 Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
                 backToMain.putExtra("username", username);
                 backToMain.putExtra("gamePass", gamePass);
-                backToMain.putExtra("nextCard", nextCard);
                 //closes the ScoreActivity class so that it can be reused
                 finish();
                 startActivity(backToMain);
@@ -128,10 +127,9 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void run ()
             {
-                Intent backtoMain = new Intent(ScoreActivity.this, MainActivity.class);
+                Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
                 backtoMain.putExtra("username", username);
                 backtoMain.putExtra("gamePass", gamePass);
-                backtoMain.putExtra("nextCard", nextCard);
                 startActivity(backtoMain);
             }
         }, DISPLAY_LENGTH);*/
@@ -151,7 +149,6 @@ public class ScoreActivity extends AppCompatActivity {
             Intent getMainIntent = getIntent();
             username = getMainIntent.getStringExtra("username");
             gamePass = getMainIntent.getStringExtra("gamePass");
-            nextCard = getMainIntent.getStringExtra("nextCard");
         }
 
         @Override
