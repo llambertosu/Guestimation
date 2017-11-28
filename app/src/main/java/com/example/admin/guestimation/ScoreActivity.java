@@ -34,6 +34,7 @@ public class ScoreActivity extends AppCompatActivity {
     public Button back;
 
     String username, gamePass, nextCard;
+    //sets arrays for displaying responses, usernames, and scores
     String[] responses = new String[10];
     String[] players = new String[10];
     String[] scores = new String[10];
@@ -105,6 +106,7 @@ public class ScoreActivity extends AppCompatActivity {
         response9.setVisibility(View.INVISIBLE);
         response10.setVisibility(View.INVISIBLE);
 
+        //calls the CheckAnswer method
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
 
@@ -112,11 +114,14 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-            Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
-            backToMain.putExtra("username", username);
-            backToMain.putExtra("gamePass", gamePass);
-            backToMain.putExtra("nextCard", nextCard);
-            startActivity(backToMain);
+                //sets the variables and starts the MainActivity class over
+                Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
+                backToMain.putExtra("username", username);
+                backToMain.putExtra("gamePass", gamePass);
+                backToMain.putExtra("nextCard", nextCard);
+                //closes the ScoreActivity class so that it can be reused
+                finish();
+                startActivity(backToMain);
             }
         });
        /* new Handler().postDelayed(new Runnable() {
@@ -133,6 +138,7 @@ public class ScoreActivity extends AppCompatActivity {
 
     }
 
+    //pulls all responses from the database then sets the correct textviews visible for users without null responses
     public class CheckAnswers extends AsyncTask<String,String,String>
     {
         String z = "";
@@ -141,6 +147,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         protected void onPreExecute()
         {
+            //gets variables passed through from MainActivity intent
             Intent getMainIntent = getIntent();
             username = getMainIntent.getStringExtra("username");
             gamePass = getMainIntent.getStringExtra("gamePass");

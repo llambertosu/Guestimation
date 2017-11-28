@@ -1,11 +1,11 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -43,13 +42,12 @@ public class MainActivity extends AppCompatActivity {
     Integer deckID, nextCard;
     int[] cards = new int[10];
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Setting values to log in for the database
+        //Getting values to log in for the database
         Intent intent = getIntent();
         nextCard = Integer.parseInt(intent.getStringExtra("nextCard"));
         username = intent.getStringExtra("username");
@@ -67,12 +65,15 @@ public class MainActivity extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
+        //calls the CheckDeck method
         CheckDeck checkDeck = new CheckDeck();
         checkDeck.execute("");
 
+        //calls the GetCard method
         GetCards getCards = new GetCards();
         getCards.execute("");
 
+        //calls the CheckQuestion method
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
 
@@ -81,12 +82,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                //Calls the submit method after an answer has been entered
                 CheckSubmit checkSubmit = new CheckSubmit();
                 checkSubmit.execute("");
             }
         });
     }
 
+    //Submits the answer to the question for the specified user
     public class CheckSubmit extends AsyncTask<String,String,String>
     {
         //Intent intent2 = getIntent();
@@ -107,10 +110,14 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
+                //Creates the intent to pass variables to the ScoreActivity class
+                String passCard = nextCard.toString();
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
-                intent.putExtra("nextCard", nextCard);
+                intent.putExtra("nextCard", passCard);
+                //closes the MainActivity so it can be reused later
+                finish();
                 startActivity(intent);
             }
 
@@ -147,13 +154,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Gets the question associated with each deck
     public class CheckQuestion extends AsyncTask<String,String,String>
     {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
-
-        int whichCard = nextCard;
 
         protected void onPreExecute()
         {
@@ -188,9 +194,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[whichCard];
-                    whichCard += 1;
-                    nextCard = whichCard;
+                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[nextCard];
+                    nextCard += 1;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
@@ -218,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Gets the deck ID associated with the GameID
     public class CheckDeck extends AsyncTask<String,String,String>
     {
         String z = "";
@@ -255,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     String gamePassword = gamePass.toString();
+                    //pulls the DeckID for use with questions
                     String query = "select DeckID from Game where GameID = '" + gamePassword + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -282,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Get the ID of all the cards associated with the particular deck
     public class GetCards extends AsyncTask<String,String,String>
     {
         String z = "";
