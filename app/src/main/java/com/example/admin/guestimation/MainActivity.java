@@ -1,11 +1,11 @@
 package com.example.admin.guestimation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     String un, pass, db, ip, username, gamePass;
     Integer deckID, nextCard;
     int[] cards = new int[10];
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
