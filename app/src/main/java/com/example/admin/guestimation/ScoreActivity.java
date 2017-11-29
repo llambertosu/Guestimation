@@ -26,18 +26,24 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView userResponse1, userResponse2, userResponse3, userResponse4, userResponse5, userResponse6, userResponse7, userResponse8, userResponse9,userResponse10;
     public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
-    public Button back;
 
     String username, gamePass;
     //sets arrays for displaying responses, usernames, and scores
     String[] responses = new String[10];
     String[] players = new String[10];
     String[] scores = new String[10];
+    Integer[] onCard = new Integer[10];
+    Integer userCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        //gets variables passed through from MainActivity intent
+        Intent getMainIntent = getIntent();
+        username = getMainIntent.getStringExtra("username");
+        gamePass = getMainIntent.getStringExtra("gamePass");
 
         score1 = findViewById(R.id.score1);
         score2 = findViewById(R.id.score2);
@@ -100,6 +106,25 @@ public class ScoreActivity extends AppCompatActivity {
         response9.setVisibility(View.INVISIBLE);
         response10.setVisibility(View.INVISIBLE);
 
+        CheckQuestion checkQuestion = new CheckQuestion();
+        checkQuestion.execute("");
+
+        //loops through each onCard result, and determines if all users have submitted an answer for the same question
+        int counter = 0;
+        while (counter < 5)
+        {
+            if (onCard[counter] == userCard)
+            {
+                //increases the counter to check the next instance
+                counter += 1;
+            }
+            else
+            {
+                //if a user has not submitted an answer for the same question, the process starts over and loops until they all have the same question answered
+                checkQuestion.execute("");
+            }
+        }
+
         //calls the CheckAnswer method
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
@@ -129,6 +154,67 @@ public class ScoreActivity extends AppCompatActivity {
             }
         }, DISPLAY_LENGTH);
 
+    }
+
+    public class CheckQuestion extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+
+        }
+
+        @Override
+        protected void onPostExecute(String r)
+        {
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    int counter = 0;
+                    String query = "select cardToPlay from Player where GameID='" + gamePass + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    while (rs.next())
+                    {
+                        Integer card = rs.getInt("cardToPlay");
+                        onCard[counter] = card;
+                        counter += 1;
+                        isSuccess = true;
+                    }
+                    String query2 = "select cardToPlay from Player where GameID='" + gamePass + "' and Nickname='" + username + "'";
+                    rs = stmt.executeQuery(query2);
+                    if (rs.next())
+                    {
+                        userCard = rs.getInt("cardToPlay");
+                    }
+                    con.close();
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
     }
 
     //pulls all responses from the database then sets the correct textviews visible for users without null responses
