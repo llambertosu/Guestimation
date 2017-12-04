@@ -55,7 +55,8 @@
         <Spinner android:id="@+id/cardSpinner"
             android:layout_width="fill_parent"
             android:drawSelectorOnTop="true"
-            android:entries="@array/items" />
+            android:entries="@array/items"
+            android:layout_height="25dp" />
 
         <Button
             android:id="@+id/loginButton"

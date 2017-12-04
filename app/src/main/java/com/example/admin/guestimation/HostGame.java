@@ -14,10 +14,12 @@ import android.os.StrictMode;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HostGame extends AppCompatActivity {
+public class HostGame extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     public EditText gamePassword, nickname;
     public Button loginButton;
@@ -37,7 +39,7 @@ public class HostGame extends AppCompatActivity {
 
     public Connection con;
     String un, pass, db, ip, gameKey;
-    Integer deckID = 1;
+    Integer deckID;
     String name1 = "";
     int[] cards = new int[10];
 
@@ -77,7 +79,32 @@ public class HostGame extends AppCompatActivity {
                 checkLogin.execute("");
             }
         });
+
+        // Spinner element
+        Spinner spinner = findViewById(R.id.cardSpinner);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("History");
+        categories.add("Architecture");
+        categories.add("OSU");
+        categories.add("Business");
+        categories.add("Media");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
     }
+
+
 
     public class CreateGame extends AsyncTask<String,String,String>
     {
@@ -212,6 +239,36 @@ public class HostGame extends AppCompatActivity {
         gamePassword.setText(gameKey);
     }
 
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        String item = adapterView.getItemAtPosition(position).toString();
+        if (item.equals("History"))
+        {
+            deckID = 1;
+        }else if (item.equals("Architecture"))
+        {
+            deckID = 2;
+        }else if (item.equals("OSU"))
+        {
+            deckID = 3;
+        }else if (item.equals("Business"))
+        {
+            deckID = 4;
+        }else if (item.equals("Media"))
+        {
+            deckID = 5;
+        }
+
+        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 /*    @SuppressLint("ResourceType")
     private void loadSpinnerData() throws SQLException {
         List<String> decks = getAllDecks();
@@ -247,12 +304,6 @@ public class HostGame extends AppCompatActivity {
 
         return decks;
     }*/
-
-
-
-
-
-
 
     /*public void onGameKeyPressed (View v) {
         clearScreen();
