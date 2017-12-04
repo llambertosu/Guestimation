@@ -9,17 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -38,8 +34,6 @@ public class ScoreActivity extends AppCompatActivity {
     String[] scores = new String[10];
     Integer[] onCard = new Integer[10];
     Integer userCard;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,21 +153,6 @@ public class ScoreActivity extends AppCompatActivity {
                 startActivity(backtoMain);
             }
         }, DISPLAY_LENGTH);
-
-        Spinner spinner = findViewById(R.id.cardSpinner);
-        ArrayAdapter<String> adapter;
-        List<String> list;
-
-        list = new ArrayList<String>();
-        list.add("Item 1");
-        list.add("Item 2");
-        list.add("Item 3");
-        list.add("Item 4");
-        list.add("Item 5");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
     }
 
