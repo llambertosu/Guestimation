@@ -27,14 +27,12 @@ import java.util.Random;
 
 public class HostGame extends AppCompatActivity {
 
-    public EditText nickname;
-    public EditText gamePass;
+    public EditText gamePassword, nickname;
     public Button loginButton;
-    private TextView _screen;
-    private String display ="";
 
     public Connection con;
-    String un, pass, db, ip;
+    String un, pass, db, ip, gameKey;
+    Integer deckID = 1;
 
 
 
@@ -45,8 +43,8 @@ public class HostGame extends AppCompatActivity {
 
         //Get values from the button, ExitText, and TextView
         nickname = findViewById(R.id.enterNickname);
-        gamePass = findViewById(R.id.enterPassword);
         loginButton = findViewById(R.id.loginButton);
+        gamePassword = findViewById(R.id.gamePassword);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -54,19 +52,61 @@ public class HostGame extends AppCompatActivity {
         un = "user";
         pass = "Cowboys2017";
 
-        _screen = findViewById(R.id.viewGameKey);
-        _screen.setText(display);
+        //_screen = findViewById(R.id.viewGameKey);
+        //_screen.setText(display);
+        generateRandom();
 
+        loginButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CreateGame createGame = new CreateGame();
+                createGame.execute("");
 
-
+                //calls the CheckLogin class
+                CheckLogin checkLogin = new CheckLogin();
+                checkLogin.execute("");
+            }
+        });
     }
 
-    private void updateScreen () {
-        _screen.setText(display);
-    }
+    public class CreateGame extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 ="";
 
-    private void clearScreen() {
-        display = "";
+        @Override
+        protected void onPostExecute(String r) {}
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    String query = "insert into Game values ('" + gameKey + "', " + deckID + ")";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(query);
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
     }
 
 
@@ -82,7 +122,7 @@ public class HostGame extends AppCompatActivity {
             {
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 intent2.putExtra("username", nickname.getText().toString());
-                intent2.putExtra("gamePass", gamePass.getText().toString());
+                intent2.putExtra("gamePass", gameKey);
                 startActivity(intent2);
             }
         }
@@ -91,7 +131,6 @@ public class HostGame extends AppCompatActivity {
         protected String doInBackground(String... params)
         {
             String userNickname = nickname.getText().toString();
-            String gamePassword = gamePass.getText().toString();
             try
             {
                 con = connectionclass();
@@ -101,7 +140,7 @@ public class HostGame extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "insert into Player (Nickname, GameID, Score, cardToPlay) values ('" + userNickname + "', '" + gamePassword + "', 0, 0)";
+                    String query = "insert into Player (Nickname, GameID, Score, cardToPlay) values ('" + userNickname + "', '" + gameKey + "', 0, 0)";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;
@@ -157,7 +196,15 @@ public class HostGame extends AppCompatActivity {
         return new String(text);
     }
 
-    public void onGameKeyPressed (View v) {
+    public void generateRandom()
+    {
+        Random random = new Random();
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        gameKey = generateString(random, chars, 4);
+        gamePassword.setText(gameKey);
+    }
+
+    /*public void onGameKeyPressed (View v) {
         clearScreen();
         Random random = new Random();
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -170,6 +217,6 @@ public class HostGame extends AppCompatActivity {
     public void onClickBack (View v) {
         Intent intent = new Intent(getApplicationContext(), Homepage.class);
         startActivity(intent);
-    }
+    }*/
 }
 
