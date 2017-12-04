@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public Connection con;
     String un, pass, db, ip, username, gamePass;
     Integer deckID, nextCard;
-    int[] cards = new int[10];
+    ArrayList<Integer> cards = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 UpdateCard updateCard = new UpdateCard();
                 updateCard.execute("");
                 //Creates the intent to pass variables to the ScoreActivity class
-                String passCard = nextCard.toString();
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, nextCard.toString(), Toast.LENGTH_LONG).show();
             //if isSuccess displays the question in a text view, if it exists or the internet connection is working
             if (isSuccess) {
-                question = (TextView) findViewById(R.id.questionView);
+                question = findViewById(R.id.questionView);
                 answer.setText("");
                 question.setText(name1);
             }
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards[nextCard];
+                    String query = "select Question from Card where DeckID=" + deckID + " and CardID=" + cards.get(nextCard);
                     nextCard += 1;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         name1 = rs.getString("CardID");
                         z = name1;
-                        cards[counter] = Integer.parseInt(z);
+                        cards.add(Integer.parseInt(z));
                         counter += 1;
                         isSuccess = true;
                     }
