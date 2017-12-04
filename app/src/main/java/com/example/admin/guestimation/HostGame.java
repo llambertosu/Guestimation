@@ -1,5 +1,6 @@
 package com.example.admin.guestimation;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -13,26 +14,32 @@ import android.os.StrictMode;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import java.security.SecureRandom;
+import android.widget.Spinner;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class HostGame extends AppCompatActivity {
 
     public EditText gamePassword, nickname;
     public Button loginButton;
+    public Spinner cardSpinner;
+    String z = "";
 
     public Connection con;
     String un, pass, db, ip, gameKey;
     Integer deckID = 1;
+    String name1 = "";
+    int[] cards = new int[10];
 
 
 
@@ -45,6 +52,7 @@ public class HostGame extends AppCompatActivity {
         nickname = findViewById(R.id.enterNickname);
         loginButton = findViewById(R.id.loginButton);
         gamePassword = findViewById(R.id.gamePassword);
+        cardSpinner = findViewById(R.id.cardSpinner);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
@@ -203,6 +211,48 @@ public class HostGame extends AppCompatActivity {
         gameKey = generateString(random, chars, 4);
         gamePassword.setText(gameKey);
     }
+
+/*    @SuppressLint("ResourceType")
+    private void loadSpinnerData() throws SQLException {
+        List<String> decks = getAllDecks();
+
+        @SuppressLint
+                ("ResourceType") ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.id.cardSpinner, decks);
+        dataAdapter.setDropDownViewResource(R.id.cardSpinner);
+
+        cardSpinner.setAdapter(dataAdapter);
+    }
+
+    public List<String> getAllDecks() throws SQLException {
+        List<String> decks = new ArrayList<String>();
+
+        String query = "SELECT DeckName from Deck";
+
+        Boolean isSuccess = false;
+        int counter = 0;
+
+        con = connectionclass();
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        ResultSet rs = stmt.executeQuery(query);
+
+        while (rs.next())
+        {
+            name1 = rs.getString("DeckName");
+            decks.set(counter, name1);
+            cards[counter] = Integer.parseInt(z);
+            counter += 1;
+            isSuccess = true;
+        }
+
+        return decks;
+    }*/
+
+
+
+
+
+
 
     /*public void onGameKeyPressed (View v) {
         clearScreen();

@@ -46,10 +46,21 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose a Deck" />
+
+        <Spinner android:id="@+id/cardSpinner"
+            android:layout_width="fill_parent"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/items" />
+
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:layout_weight="1"
             android:text="Login" />
     </LinearLayout>
