@@ -1,6 +1,4 @@
 package com.example.admin.guestimation;
-
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -20,10 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -35,15 +31,10 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
     public EditText gamePassword, nickname;
     public Button loginButton;
     public Spinner cardSpinner;
-    String z = "";
 
     public Connection con;
     String un, pass, db, ip, gameKey;
     Integer deckID;
-    String name1 = "";
-    int[] cards = new int[10];
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +149,7 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gameKey);
+                intent2.putExtra("isAdmin", "Y");
                 startActivity(intent2);
             }
         }

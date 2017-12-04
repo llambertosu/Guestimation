@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Declaring connection variables
     public Connection con;
-    String un, pass, db, ip, username, gamePass;
+    String un, pass, db, ip, username, gamePass, isAdmin;
     Integer deckID, nextCard;
     ArrayList<Integer> cards = new ArrayList<>();
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         gamePass = intent.getStringExtra("gamePass");
+        isAdmin = intent.getStringExtra("isAdmin");
 
         //Get values from the button, ExitText, and TextView
         answer = findViewById(R.id.answerBox);
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
+                intent.putExtra("isAdmin", isAdmin);
                 //closes the MainActivity so it can be reused later
                 finish();
                 startActivity(intent);
