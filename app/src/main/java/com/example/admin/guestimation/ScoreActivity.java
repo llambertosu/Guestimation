@@ -33,7 +33,7 @@ public class ScoreActivity extends AppCompatActivity {
     ArrayList<String> responses = new ArrayList<>();
     ArrayList<String> players = new ArrayList<>();
     ArrayList<String> scores = new ArrayList<>();
-    int userCard;
+    int userCard, answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +126,10 @@ public class ScoreActivity extends AppCompatActivity {
             }
         }
 
+        GetCorrect getCorrect = new GetCorrect();
+        getCorrect.execute("");
+
+
         //calls the CheckAnswer method
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
@@ -215,6 +219,60 @@ public class ScoreActivity extends AppCompatActivity {
             }
             return z;
         }
+    }
+
+    public class GetCorrect extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+
+        }
+
+        @Override
+        protected void onPostExecute(String r)
+        {
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    int cardID = userCard - 1;
+                    String query = "select Answer from Card where CardID='" + cardID + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if (rs.next())
+                    {
+                        Integer card = rs.getInt("Answer");
+                        answer = card;
+                        isSuccess = true;
+                    }
+                    con.close();
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+
     }
 
     //pulls all responses from the database then sets the correct textviews visible for users without null responses
