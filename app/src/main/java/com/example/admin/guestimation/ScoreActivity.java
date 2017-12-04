@@ -27,7 +27,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
 
-    String username, gamePass;
+    String username, gamePass, isAdmin;
     //sets arrays for displaying responses, usernames, and scores
     ArrayList<Integer> onCard = new ArrayList<>();
     ArrayList<String> responses = new ArrayList<>();
@@ -44,6 +44,7 @@ public class ScoreActivity extends AppCompatActivity {
         Intent getMainIntent = getIntent();
         username = getMainIntent.getStringExtra("username");
         gamePass = getMainIntent.getStringExtra("gamePass");
+        isAdmin = getMainIntent.getStringExtra("isAdmin");
 
         score1 = findViewById(R.id.score1);
         score2 = findViewById(R.id.score2);
@@ -149,6 +150,7 @@ public class ScoreActivity extends AppCompatActivity {
                 Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
                 backtoMain.putExtra("username", username);
                 backtoMain.putExtra("gamePass", gamePass);
+                backtoMain.putExtra("isAdmin", isAdmin);
                 finish();
                 startActivity(backtoMain);
             }
