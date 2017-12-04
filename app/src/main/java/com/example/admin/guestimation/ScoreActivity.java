@@ -26,6 +26,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView userResponse1, userResponse2, userResponse3, userResponse4, userResponse5, userResponse6, userResponse7, userResponse8, userResponse9,userResponse10;
     public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
+    public TextView correctAnswer;
 
     String username, gamePass, isAdmin;
     //sets arrays for displaying responses, usernames, and scores
@@ -33,7 +34,7 @@ public class ScoreActivity extends AppCompatActivity {
     ArrayList<String> responses = new ArrayList<>();
     ArrayList<String> players = new ArrayList<>();
     ArrayList<String> scores = new ArrayList<>();
-    int userCard, answer;
+    Integer userCard, answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class ScoreActivity extends AppCompatActivity {
         gamePass = getMainIntent.getStringExtra("gamePass");
         isAdmin = getMainIntent.getStringExtra("isAdmin");
 
+        correctAnswer = findViewById(R.id.correctAnswer);
+        correctAnswer.setVisibility(View.INVISIBLE);
         score1 = findViewById(R.id.score1);
         score2 = findViewById(R.id.score2);
         score3 = findViewById(R.id.score3);
@@ -221,6 +224,58 @@ public class ScoreActivity extends AppCompatActivity {
         }
     }
 
+    public class computeScore extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute(){
+            Integer winner = 99999;
+            for(String i: responses) {
+                if(answer - Integer.parseInt(i) < winner && answer - Integer.parseInt(i) >= 0)
+                {
+                    winner = Integer.parseInt(i);
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(){
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();
+                if (con == null)
+                {
+                    z = "Check your internet access and try again!";
+                }
+                else
+                {
+                    String query = "update Player set Score = " + submitAns + " where Nickname='" + username + "' and GameID='" + gamePass + "';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(query);
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+
+
+    }
+
     public class GetCorrect extends AsyncTask<String,String,String>
     {
         String z = "";
@@ -235,7 +290,13 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
+            if (isSuccess = true)
+            {
+                String answerString = answer.toString();
+                correctAnswer.setText(answerString);
+                correctAnswer.setVisibility(View.VISIBLE);
 
+            }
         }
 
         @Override
