@@ -53,8 +53,6 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
         un = "user";
         pass = "Cowboys2017";
 
-        //_screen = findViewById(R.id.viewGameKey);
-        //_screen.setText(display);
         generateRandom();
 
         loginButton.setOnClickListener(new View.OnClickListener()
