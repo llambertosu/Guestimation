@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -34,7 +36,7 @@ public class ScoreActivity extends AppCompatActivity {
     ArrayList<String> responses = new ArrayList<>();
     ArrayList<String> players = new ArrayList<>();
     ArrayList<String> scores = new ArrayList<>();
-    Integer userCard, answer;
+    Integer userCard, answer, card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ScoreActivity extends AppCompatActivity {
         username = getMainIntent.getStringExtra("username");
         gamePass = getMainIntent.getStringExtra("gamePass");
         isAdmin = getMainIntent.getStringExtra("isAdmin");
+        card = Integer.parseInt(getMainIntent.getStringExtra("lastCardPlayed")) - 1;
 
         correctAnswer = findViewById(R.id.correctAnswer);
         correctAnswer.setVisibility(View.INVISIBLE);
@@ -137,20 +140,10 @@ public class ScoreActivity extends AppCompatActivity {
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
 
-        /*back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                //sets the variables and starts the MainActivity class over
-                Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
-                backToMain.putExtra("username", username);
-                backToMain.putExtra("gamePass", gamePass);
-                //closes the ScoreActivity class so that it can be reused
-                finish();
-                startActivity(backToMain);
-            }
-        });*/
-        new Handler().postDelayed(new Runnable() {
+        ComputeScore computeScore = new ComputeScore();
+        computeScore.execute("");
+
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run ()
             {
@@ -161,7 +154,7 @@ public class ScoreActivity extends AppCompatActivity {
                 finish();
                 startActivity(backtoMain);
             }
-        }, DISPLAY_LENGTH);
+        }, DISPLAY_LENGTH);*/
 
     }
 
@@ -200,8 +193,8 @@ public class ScoreActivity extends AppCompatActivity {
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next())
                     {
-                        Integer card = rs.getInt("cardToPlay");
-                        onCard.add(card);
+                        Integer cardPlay = rs.getInt("cardToPlay");
+                        onCard.add(cardPlay);
                         isSuccess = true;
                     }
                     String query2 = "select cardToPlay from Player where GameID='" + gamePass + "' and Nickname='" + username + "'";
@@ -224,14 +217,14 @@ public class ScoreActivity extends AppCompatActivity {
         }
     }
 
-    public class computeScore extends AsyncTask<String,String,String>
+    public class ComputeScore extends AsyncTask<String,String,String>
     {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
+        Integer winner = 9999;
 
         protected void onPreExecute(){
-            Integer winner = 99999;
             for(String i: responses) {
                 if(answer - Integer.parseInt(i) < winner && answer - Integer.parseInt(i) >= 0)
                 {
@@ -241,8 +234,9 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(){
-
+        protected void onPostExecute(String r)
+        {
+            Toast.makeText(ScoreActivity.this, winner.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -257,7 +251,7 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "update Player set Score = " + submitAns + " where Nickname='" + username + "' and GameID='" + gamePass + "';";
+                    String query = "update Player set Score = Score + 100 where response = " + winner + " and GameID = '" + gamePass + "';";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     isSuccess = true;
@@ -295,7 +289,6 @@ public class ScoreActivity extends AppCompatActivity {
                 String answerString = answer.toString();
                 correctAnswer.setText(answerString);
                 correctAnswer.setVisibility(View.VISIBLE);
-
             }
         }
 
@@ -308,17 +301,16 @@ public class ScoreActivity extends AppCompatActivity {
                 if (con == null)
                 {
                     z = "Check your internet access and try again!";
+                    isSuccess = false;
                 }
                 else
                 {
-                    int cardID = userCard - 1;
-                    String query = "select Answer from Card where CardID='" + cardID + "'";
+                    String query = "select * from Card where CardID= " + card;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
                     {
-                        Integer card = rs.getInt("Answer");
-                        answer = card;
+                        answer = rs.getInt("Answer");
                         isSuccess = true;
                     }
                     con.close();

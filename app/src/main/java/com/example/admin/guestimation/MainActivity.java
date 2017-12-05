@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
                 intent.putExtra("isAdmin", isAdmin);
+                intent.putExtra("lastCardPlayed", cards.get(nextCard).toString());
                 //closes the MainActivity so it can be reused later
                 finish();
                 startActivity(intent);
@@ -313,7 +314,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    int counter = 0;
                     String query = "select CardID from Card where DeckID =" + deckID;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -322,7 +322,6 @@ public class MainActivity extends AppCompatActivity {
                         name1 = rs.getString("CardID");
                         z = name1;
                         cards.add(Integer.parseInt(z));
-                        counter += 1;
                         isSuccess = true;
                     }
                     con.close();
