@@ -113,18 +113,15 @@ public class ScoreActivity extends AppCompatActivity {
         response9.setVisibility(View.INVISIBLE);
         response10.setVisibility(View.INVISIBLE);
 
+        //calls the checkquestion method in order to pull all responses from the database and the card each user is on
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
 
         //loops through each onCard result, and determines if all users have submitted an answer for the same question
-        int counter = 0;
-        while (counter < onCard.size())
+        for (Integer card : onCard)
         {
-            if (onCard.get(counter) == userCard)
-            {
-                //increases the counter to check the next instance
-                counter += 1;
-            }
+            if (card.equals(userCard))
+            {}
             else
             {
                 //if a user has not submitted an answer for the same question, the process starts over and loops until they all have the same question answered
@@ -132,6 +129,7 @@ public class ScoreActivity extends AppCompatActivity {
             }
         }
 
+        //calls the method to pull the correct answer and display it in a textView on the screen
         GetCorrect getCorrect = new GetCorrect();
         getCorrect.execute("");
 
@@ -140,6 +138,7 @@ public class ScoreActivity extends AppCompatActivity {
         CheckAnswers checkAnswers = new CheckAnswers();
         checkAnswers.execute("");
 
+        //calls the method to determine the closest answer, and updates the score by 100 points
         ComputeScore computeScore = new ComputeScore();
         computeScore.execute("");
 
@@ -188,6 +187,7 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //pulls the cardToPlay for each player, to assure everyone has answered the correct question before everyone can see it
                     String query = "select cardToPlay from Player where GameID='" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -197,6 +197,7 @@ public class ScoreActivity extends AppCompatActivity {
                         onCard.add(cardPlay);
                         isSuccess = true;
                     }
+                    //pulls the users cardToPlay for comparison
                     String query2 = "select cardToPlay from Player where GameID='" + gamePass + "' and Nickname='" + username + "'";
                     rs = stmt.executeQuery(query2);
                     if (rs.next())
@@ -251,6 +252,7 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //updates the score for every player that has the closest or correct answer
                     String query = "update Player set Score = Score + 100 where response = " + winner + " and GameID = '" + gamePass + "';";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
@@ -286,6 +288,7 @@ public class ScoreActivity extends AppCompatActivity {
         {
             if (isSuccess = true)
             {
+                //sets the correctAnswer textview
                 String answerString = answer.toString();
                 correctAnswer.setText(answerString);
                 correctAnswer.setVisibility(View.VISIBLE);
@@ -305,6 +308,7 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //pulls the answer from the database
                     String query = "select * from Card where CardID= " + card;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -346,6 +350,7 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
+            //determines how many entries are in the arrayList and sets the views visible with usernames for that many
             if (players.size() == 10 && responses.size() == 10)
             {
                 userResponse1.setText(players.get(0));
@@ -828,6 +833,7 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //pulls the response, nickname, and score for each player in the database associated with the gameID, in order to display them to the screen
                     String query = "select Response, Nickname, Score from Player where GameID='" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
