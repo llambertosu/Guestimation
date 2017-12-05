@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("username", username);
                 intent.putExtra("gamePass", gamePass);
                 intent.putExtra("isAdmin", isAdmin);
-                intent.putExtra("lastCardPlayed", cards.get(nextCard).toString());
+                intent.putExtra("lastCardPlayed",Integer.toString(cards.get(nextCard)));
                 //closes the MainActivity so it can be reused later
                 finish();
                 startActivity(intent);

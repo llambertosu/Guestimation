@@ -117,31 +117,6 @@ public class ScoreActivity extends AppCompatActivity {
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
 
-        //loops through each onCard result, and determines if all users have submitted an answer for the same question
-        for (Integer card : onCard)
-        {
-            if (card.equals(userCard))
-            {}
-            else
-            {
-                //if a user has not submitted an answer for the same question, the process starts over and loops until they all have the same question answered
-                checkQuestion.execute("");
-            }
-        }
-
-        //calls the method to pull the correct answer and display it in a textView on the screen
-        GetCorrect getCorrect = new GetCorrect();
-        getCorrect.execute("");
-
-
-        //calls the CheckAnswer method
-        CheckAnswers checkAnswers = new CheckAnswers();
-        checkAnswers.execute("");
-
-        //calls the method to determine the closest answer, and updates the score by 100 points
-        ComputeScore computeScore = new ComputeScore();
-        computeScore.execute("");
-
        /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run ()
@@ -171,8 +146,9 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-
-
+            //calls the CheckAnswer method
+            CheckAnswers checkAnswers = new CheckAnswers();
+            checkAnswers.execute("");
         }
 
         @Override
@@ -199,10 +175,10 @@ public class ScoreActivity extends AppCompatActivity {
                     }
                     //pulls the users cardToPlay for comparison
                     String query2 = "select cardToPlay from Player where GameID='" + gamePass + "' and Nickname='" + username + "'";
-                    rs = stmt.executeQuery(query2);
-                    if (rs.next())
+                    ResultSet rs1 = stmt.executeQuery(query2);
+                    if (rs1.next())
                     {
-                        userCard = rs.getInt("cardToPlay");
+                        userCard = rs1.getInt("cardToPlay");
                     }
                     con.close();
                 }
@@ -237,7 +213,7 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            Toast.makeText(ScoreActivity.this, winner.toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(ScoreActivity.this, winner.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -289,10 +265,12 @@ public class ScoreActivity extends AppCompatActivity {
             if (isSuccess = true)
             {
                 //sets the correctAnswer textview
-                String answerString = answer.toString();
-                correctAnswer.setText(answerString);
+                correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
             }
+            //calls the method to determine the closest answer, and updates the score by 100 points
+            ComputeScore computeScore = new ComputeScore();
+            computeScore.execute("");
         }
 
         @Override
@@ -309,15 +287,16 @@ public class ScoreActivity extends AppCompatActivity {
                 else
                 {
                     //pulls the answer from the database
-                    String query = "select * from Card where CardID= " + card;
+                    String query = "select Answer from Card where CardID= " + card;
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
                     {
-                        answer = rs.getInt("Answer");
+                        name1 = rs.getString("Answer");
+                        answer = Integer.parseInt(name1);
                         isSuccess = true;
+                        con.close();
                     }
-                    con.close();
                 }
             }
             catch (Exception ex)
@@ -345,6 +324,14 @@ public class ScoreActivity extends AppCompatActivity {
             Intent getMainIntent = getIntent();
             username = getMainIntent.getStringExtra("username");
             gamePass = getMainIntent.getStringExtra("gamePass");
+
+            int counter = 0;
+            while (onCard.get(counter) != userCard && counter < onCard.size()) {
+                onCard.clear();
+                CheckQuestion checkQuestion = new CheckQuestion();
+                checkQuestion.execute("");
+                counter += 1;
+            }
         }
 
         @Override
@@ -819,6 +806,9 @@ public class ScoreActivity extends AppCompatActivity {
                 score1.setText(scores.get(0));
                 score1.setVisibility(View.VISIBLE);
             }
+            //calls the method to pull the correct answer and display it in a textView on the screen
+            GetCorrect getCorrect = new GetCorrect();
+            getCorrect.execute("");
         }
 
         @Override
