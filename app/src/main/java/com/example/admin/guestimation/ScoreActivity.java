@@ -140,7 +140,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         protected void onPreExecute()
         {
-
+            onCard.clear();
         }
 
         @Override
@@ -327,7 +327,6 @@ public class ScoreActivity extends AppCompatActivity {
 
             int counter = 0;
             while (onCard.get(counter) != userCard && counter < onCard.size()) {
-                onCard.clear();
                 CheckQuestion checkQuestion = new CheckQuestion();
                 checkQuestion.execute("");
                 counter += 1;
