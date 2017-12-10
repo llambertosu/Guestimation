@@ -116,21 +116,6 @@ public class ScoreActivity extends AppCompatActivity {
         //calls the checkquestion method in order to pull all responses from the database and the card each user is on
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
-
-
-       new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run ()
-            {
-                Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
-                backtoMain.putExtra("username", username);
-                backtoMain.putExtra("gamePass", gamePass);
-                backtoMain.putExtra("isAdmin", isAdmin);
-                finish();
-                startActivity(backtoMain);
-            }
-        }, DISPLAY_LENGTH);
-
     }
 
     public class CheckQuestion extends AsyncTask<String,String,String>
@@ -268,6 +253,18 @@ public class ScoreActivity extends AppCompatActivity {
                 //sets the correctAnswer textview
                 correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run ()
+                    {
+                        Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
+                        backtoMain.putExtra("username", username);
+                        backtoMain.putExtra("gamePass", gamePass);
+                        backtoMain.putExtra("isAdmin", isAdmin);
+                        finish();
+                        startActivity(backtoMain);
+                    }
+                }, DISPLAY_LENGTH);
             }
             if (isAdmin.equals("Y")) {
                 //calls the method to determine the closest answer, and updates the score by 100 points
