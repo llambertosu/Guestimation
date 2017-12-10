@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class ScoreActivity extends AppCompatActivity {
 
-    private final int DISPLAY_LENGTH = 25000;
+    private final int DISPLAY_LENGTH = 20000;
 
     public Connection con;
 
