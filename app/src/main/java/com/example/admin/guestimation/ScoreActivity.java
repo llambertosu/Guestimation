@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class ScoreActivity extends AppCompatActivity {
 
-    private final int DISPLAY_LENGTH = 5000;
+    private final int DISPLAY_LENGTH = 25000;
 
     public Connection con;
 
@@ -117,7 +117,8 @@ public class ScoreActivity extends AppCompatActivity {
         CheckQuestion checkQuestion = new CheckQuestion();
         checkQuestion.execute("");
 
-       /* new Handler().postDelayed(new Runnable() {
+
+       new Handler().postDelayed(new Runnable() {
             @Override
             public void run ()
             {
@@ -128,7 +129,7 @@ public class ScoreActivity extends AppCompatActivity {
                 finish();
                 startActivity(backtoMain);
             }
-        }, DISPLAY_LENGTH);*/
+        }, DISPLAY_LENGTH);
 
     }
 
@@ -268,9 +269,11 @@ public class ScoreActivity extends AppCompatActivity {
                 correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
             }
-            //calls the method to determine the closest answer, and updates the score by 100 points
-            ComputeScore computeScore = new ComputeScore();
-            computeScore.execute("");
+            if (isAdmin.equals("Y")) {
+                //calls the method to determine the closest answer, and updates the score by 100 points
+                ComputeScore computeScore = new ComputeScore();
+                computeScore.execute("");
+            }
         }
 
         @Override
