@@ -113,21 +113,13 @@ public class DisplayWinner extends AppCompatActivity {
                 }
                 else
                 {
-                    //pulls the cardToPlay for each player, to assure everyone has answered the correct question before everyone can see it
-                    String query = "select MAX(Score) as Score from Player where GameID='" + gamePass + "'";
+                    //pulls the users cardToPlay for comparison
+                    String query = "Select nickname from player where GameID='" + gamePass + "' and Score=(Select Max(Score) from Player where GameID='" + gamePass + "') ";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
-                    if (rs.next())
+                    while (rs.next())
                     {
-                        score = rs.getInt("Score");
-                        isSuccess = true;
-                    }
-                    //pulls the users cardToPlay for comparison
-                    String query2 = "select Nickname from Player where GameID='" + gamePass + "' and Score=" + score + "";
-                    ResultSet rs1 = stmt.executeQuery(query2);
-                    while (rs1.next())
-                    {
-                        winner = rs1.getString("Nickname");
+                        winner = rs.getString("Nickname");
                         winners.add(winner);
                     }
                     con.close();
