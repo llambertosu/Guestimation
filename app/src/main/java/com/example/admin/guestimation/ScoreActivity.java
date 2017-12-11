@@ -230,8 +230,6 @@ public class ScoreActivity extends AppCompatActivity {
             }
             return z;
         }
-
-
     }
 
     public class GetCorrect extends AsyncTask<String,String,String>
@@ -253,18 +251,33 @@ public class ScoreActivity extends AppCompatActivity {
                 //sets the correctAnswer textview
                 correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run ()
-                    {
-                        Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
-                        backtoMain.putExtra("username", username);
-                        backtoMain.putExtra("gamePass", gamePass);
-                        backtoMain.putExtra("isAdmin", isAdmin);
-                        finish();
-                        startActivity(backtoMain);
-                    }
-                }, DISPLAY_LENGTH);
+                if (card != 9) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent backtoMain = new Intent(getApplicationContext(), MainActivity.class);
+                            backtoMain.putExtra("username", username);
+                            backtoMain.putExtra("gamePass", gamePass);
+                            backtoMain.putExtra("isAdmin", isAdmin);
+                            finish();
+                            startActivity(backtoMain);
+                        }
+                    }, DISPLAY_LENGTH);
+                }
+                else
+                {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent winner = new Intent(getApplicationContext(), DisplayWinner.class);
+                            winner.putExtra("username", username);
+                            winner.putExtra("gamePass", gamePass);
+                            winner.putExtra("isAdmin", isAdmin);
+                            finish();
+                            startActivity(winner);
+                        }
+                    }, DISPLAY_LENGTH);
+                }
             }
             if (isAdmin.equals("Y")) {
                 //calls the method to determine the closest answer, and updates the score by 100 points
@@ -429,7 +442,6 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse7.setVisibility(View.VISIBLE);
                 userResponse8.setVisibility(View.VISIBLE);
                 userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
@@ -439,7 +451,6 @@ public class ScoreActivity extends AppCompatActivity {
                 response7.setVisibility(View.VISIBLE);
                 response8.setVisibility(View.VISIBLE);
                 response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -449,7 +460,6 @@ public class ScoreActivity extends AppCompatActivity {
                 score7.setVisibility(View.VISIBLE);
                 score8.setVisibility(View.VISIBLE);
                 score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -486,8 +496,6 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse6.setVisibility(View.VISIBLE);
                 userResponse7.setVisibility(View.VISIBLE);
                 userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
@@ -496,8 +504,6 @@ public class ScoreActivity extends AppCompatActivity {
                 response6.setVisibility(View.VISIBLE);
                 response7.setVisibility(View.VISIBLE);
                 response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
@@ -506,8 +512,6 @@ public class ScoreActivity extends AppCompatActivity {
                 score6.setVisibility(View.VISIBLE);
                 score7.setVisibility(View.VISIBLE);
                 score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -591,30 +595,18 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse4.setVisibility(View.VISIBLE);
                 userResponse5.setVisibility(View.VISIBLE);
                 userResponse6.setVisibility(View.VISIBLE);
-                userResponse7.setVisibility(View.VISIBLE);
-                userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
                 response4.setVisibility(View.VISIBLE);
                 response5.setVisibility(View.VISIBLE);
                 response6.setVisibility(View.VISIBLE);
-                response7.setVisibility(View.VISIBLE);
-                response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
                 score4.setVisibility(View.VISIBLE);
                 score5.setVisibility(View.VISIBLE);
                 score6.setVisibility(View.VISIBLE);
-                score7.setVisibility(View.VISIBLE);
-                score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -639,31 +631,16 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse3.setVisibility(View.VISIBLE);
                 userResponse4.setVisibility(View.VISIBLE);
                 userResponse5.setVisibility(View.VISIBLE);
-                userResponse6.setVisibility(View.VISIBLE);
-                userResponse7.setVisibility(View.VISIBLE);
-                userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
                 response4.setVisibility(View.VISIBLE);
                 response5.setVisibility(View.VISIBLE);
-                response6.setVisibility(View.VISIBLE);
-                response7.setVisibility(View.VISIBLE);
-                response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
                 score4.setVisibility(View.VISIBLE);
                 score5.setVisibility(View.VISIBLE);
-                score6.setVisibility(View.VISIBLE);
-                score7.setVisibility(View.VISIBLE);
-                score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -684,32 +661,14 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse2.setVisibility(View.VISIBLE);
                 userResponse3.setVisibility(View.VISIBLE);
                 userResponse4.setVisibility(View.VISIBLE);
-                userResponse5.setVisibility(View.VISIBLE);
-                userResponse6.setVisibility(View.VISIBLE);
-                userResponse7.setVisibility(View.VISIBLE);
-                userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
                 response4.setVisibility(View.VISIBLE);
-                response5.setVisibility(View.VISIBLE);
-                response6.setVisibility(View.VISIBLE);
-                response7.setVisibility(View.VISIBLE);
-                response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
                 score4.setVisibility(View.VISIBLE);
-                score5.setVisibility(View.VISIBLE);
-                score6.setVisibility(View.VISIBLE);
-                score7.setVisibility(View.VISIBLE);
-                score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -726,33 +685,12 @@ public class ScoreActivity extends AppCompatActivity {
                 userResponse1.setVisibility(View.VISIBLE);
                 userResponse2.setVisibility(View.VISIBLE);
                 userResponse3.setVisibility(View.VISIBLE);
-                userResponse4.setVisibility(View.VISIBLE);
-                userResponse5.setVisibility(View.VISIBLE);
-                userResponse6.setVisibility(View.VISIBLE);
-                userResponse7.setVisibility(View.VISIBLE);
-                userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
                 response3.setVisibility(View.VISIBLE);
-                response4.setVisibility(View.VISIBLE);
-                response5.setVisibility(View.VISIBLE);
-                response6.setVisibility(View.VISIBLE);
-                response7.setVisibility(View.VISIBLE);
-                response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
                 score3.setVisibility(View.VISIBLE);
-                score4.setVisibility(View.VISIBLE);
-                score5.setVisibility(View.VISIBLE);
-                score6.setVisibility(View.VISIBLE);
-                score7.setVisibility(View.VISIBLE);
-                score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
                 score3.setText(scores.get(2));
@@ -765,34 +703,10 @@ public class ScoreActivity extends AppCompatActivity {
                 response2.setText(responses.get(1));
                 userResponse1.setVisibility(View.VISIBLE);
                 userResponse2.setVisibility(View.VISIBLE);
-                userResponse3.setVisibility(View.VISIBLE);
-                userResponse4.setVisibility(View.VISIBLE);
-                userResponse5.setVisibility(View.VISIBLE);
-                userResponse6.setVisibility(View.VISIBLE);
-                userResponse7.setVisibility(View.VISIBLE);
-                userResponse8.setVisibility(View.VISIBLE);
-                userResponse9.setVisibility(View.VISIBLE);
-                userResponse10.setVisibility(View.VISIBLE);
                 response1.setVisibility(View.VISIBLE);
                 response2.setVisibility(View.VISIBLE);
-                response3.setVisibility(View.VISIBLE);
-                response4.setVisibility(View.VISIBLE);
-                response5.setVisibility(View.VISIBLE);
-                response6.setVisibility(View.VISIBLE);
-                response7.setVisibility(View.VISIBLE);
-                response8.setVisibility(View.VISIBLE);
-                response9.setVisibility(View.VISIBLE);
-                response10.setVisibility(View.VISIBLE);
                 score1.setVisibility(View.VISIBLE);
                 score2.setVisibility(View.VISIBLE);
-                score3.setVisibility(View.VISIBLE);
-                score4.setVisibility(View.VISIBLE);
-                score5.setVisibility(View.VISIBLE);
-                score6.setVisibility(View.VISIBLE);
-                score7.setVisibility(View.VISIBLE);
-                score8.setVisibility(View.VISIBLE);
-                score9.setVisibility(View.VISIBLE);
-                score10.setVisibility(View.VISIBLE);
                 score1.setText(scores.get(0));
                 score2.setText(scores.get(1));
             }

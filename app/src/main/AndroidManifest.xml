@@ -20,11 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserLogin"/>
-        <activity android:name=".HostGame"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ScoreActivity"/>
-
+        <activity android:name=".UserLogin" />
+        <activity android:name=".HostGame" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ScoreActivity" />
+        <activity android:name=".DisplayWinner"></activity>
     </application>
 
 </manifest>
