@@ -76,6 +76,7 @@ public class UserLogin extends AppCompatActivity {
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gamePass.getText().toString());
                 intent2.putExtra("isAdmin", "N");
+                finish();
                 startActivity(intent2);
             }
             else

@@ -148,6 +148,7 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
                 intent2.putExtra("username", nickname.getText().toString());
                 intent2.putExtra("gamePass", gameKey);
                 intent2.putExtra("isAdmin", "Y");
+                finish();
                 startActivity(intent2);
             }
         }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,6 +20,7 @@ public class DisplayWinner extends AppCompatActivity {
 
     public Connection con;
     public TextView displayWinner;
+    public Button back;
     String username, gamePass, isAdmin, winner;
 
     @Override
@@ -31,17 +33,29 @@ public class DisplayWinner extends AppCompatActivity {
         gamePass = getMainIntent.getStringExtra("gamePass");
         isAdmin = getMainIntent.getStringExtra("isAdmin");
 
+        back = findViewById(R.id.back);
+        back.setVisibility(View.INVISIBLE);
         displayWinner = findViewById(R.id.displayWinner);
         displayWinner.setVisibility(View.INVISIBLE);
 
         CheckWinner checkWinner = new CheckWinner();
         checkWinner.execute("");
 
-        if (isAdmin.equals("Y"))
+        back.setOnClickListener(new View.OnClickListener()
         {
-            DeleteGame deletegame = new DeleteGame();
-            deletegame.execute("");
-        }
+            @Override
+            public void onClick(View v)
+            {
+                if (isAdmin.equals("Y"))
+                {
+                    DeleteGame deletegame = new DeleteGame();
+                    deletegame.execute("");
+                }
+                Intent backHome = new Intent(getApplicationContext(), Homepage.class);
+                finish();
+                startActivity(backHome);
+            }
+        });
     }
 
     public class CheckWinner extends AsyncTask<String,String,String>
@@ -60,6 +74,7 @@ public class DisplayWinner extends AppCompatActivity {
         {
             displayWinner.setText(winner);
             displayWinner.setVisibility(View.VISIBLE);
+            back.setVisibility(View.VISIBLE);
         }
 
         @Override
