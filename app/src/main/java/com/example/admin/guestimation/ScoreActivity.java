@@ -242,11 +242,21 @@ public class ScoreActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    //updates the score for every player that has the closest or correct answer
-                    String query = "update Player set Score = Score + 100 where response = " + winner + " and GameID = '" + gamePass + "';";
-                    Statement stmt = con.createStatement();
-                    stmt.executeUpdate(query);
-                    isSuccess = true;
+                    if (winner.equals(answer)) {
+                        //updates the score for every player that has the closest or correct answer
+                        String query = "update Player set Score = Score + 150 where response = " + winner + " and GameID = '" + gamePass + "';";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(query);
+                        isSuccess = true;
+                    }
+                    else
+                    {
+                        //updates the score for every player that has the closest or correct answer
+                        String query = "update Player set Score = Score + 100 where response = " + winner + " and GameID = '" + gamePass + "';";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(query);
+                        isSuccess = true;
+                    }
                 }
             }
             catch (Exception ex)
