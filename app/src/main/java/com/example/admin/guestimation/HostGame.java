@@ -242,13 +242,13 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
             deckID = 2;
         }else if (item.equals("OSU"))
         {
-            deckID = 3;
+            deckID = 4;
         }else if (item.equals("Business"))
         {
-            deckID = 4;
+            deckID = 5;
         }else if (item.equals("Media"))
         {
-            deckID = 5;
+            deckID = 6;
         }
 
         Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();

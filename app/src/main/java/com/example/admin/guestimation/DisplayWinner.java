@@ -76,12 +76,12 @@ public class DisplayWinner extends AppCompatActivity {
                 else
                 {
                     //pulls the cardToPlay for each player, to assure everyone has answered the correct question before everyone can see it
-                    String query = "select MAX(Score) from Player where GameID='" + gamePass + "'";
+                    String query = "select MAX(Score) as Score from Player where GameID='" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
                     {
-                        score = rs.getInt("Max(Score)");
+                        score = rs.getInt("Score");
                         isSuccess = true;
                     }
                     //pulls the users cardToPlay for comparison
