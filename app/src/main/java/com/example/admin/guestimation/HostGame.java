@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,6 +32,7 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
     public EditText gamePassword, nickname;
     public Button loginButton;
     public Spinner cardSpinner;
+    public TextView gamePass;
 
     public Connection con;
     String un, pass, db, ip, gameKey;
@@ -42,9 +44,9 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.activity_host_game);
 
         //Get values from the button, ExitText, and TextView
+        gamePass = findViewById(R.id.gamePass);
         nickname = findViewById(R.id.enterNickname);
         loginButton = findViewById(R.id.loginButton);
-        gamePassword = findViewById(R.id.gamePassword);
         cardSpinner = findViewById(R.id.cardSpinner);
 
         //Declare Server ip, username, database name, and password
@@ -227,7 +229,7 @@ public class HostGame extends AppCompatActivity implements AdapterView.OnItemSel
         Random random = new Random();
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         gameKey = generateString(random, chars, 4);
-        gamePassword.setText(gameKey);
+        gamePass.setText(gameKey);
     }
 
 

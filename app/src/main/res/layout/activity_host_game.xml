@@ -38,19 +38,26 @@
             android:layout_height="wrap_content"
             android:text="Game Password:" />
 
-        <EditText
-            android:id="@+id/gamePassword"
+        <TextView
+            android:id="@+id/gamePass"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/disclaimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:text='Ensure you have given the Game Password to all players before clicking "Login"'
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose a Deck" />
+            android:text="Choose a Deck"
+            android:textSize="20sp" />
 
         <Spinner android:id="@+id/cardSpinner"
             android:layout_width="fill_parent"
