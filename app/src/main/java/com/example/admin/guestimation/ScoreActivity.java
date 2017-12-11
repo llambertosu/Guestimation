@@ -127,6 +127,27 @@ public class ScoreActivity extends AppCompatActivity {
         checkQuestion.execute("");
     }
 
+    public String WaitforResponse() {
+        int counter = 0;
+        while (counter < onCard.size()) {
+            if (onCard.get(counter) != userCard)
+            {
+                CheckQuestion checkQuestion = new CheckQuestion();
+                checkQuestion.execute("");
+                return "returned";
+            }
+            else
+            {
+                counter += 1;
+            }
+        }
+        //calls the CheckAnswer method
+        CheckAnswers checkAnswers = new CheckAnswers();
+        checkAnswers.execute("");
+        return "finished";
+    }
+
+
     public class CheckQuestion extends AsyncTask<String,String,String>
     {
         String z = "";
@@ -141,9 +162,7 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            //calls the CheckAnswer method
-            CheckAnswers checkAnswers = new CheckAnswers();
-            checkAnswers.execute("");
+            WaitforResponse();
         }
 
         @Override
@@ -349,12 +368,16 @@ public class ScoreActivity extends AppCompatActivity {
             username = getMainIntent.getStringExtra("username");
             gamePass = getMainIntent.getStringExtra("gamePass");
 
-            int counter = 0;
-            while (onCard.get(counter) != userCard && counter < onCard.size()) {
-                CheckQuestion checkQuestion = new CheckQuestion();
-                checkQuestion.execute("");
-                counter += 1;
-            }
+           /* int counter = 0;
+            while (counter < onCard.size()) {
+                if (onCard.get(counter) != userCard) {
+                    CheckQuestion checkQuestion = new CheckQuestion();
+                    checkQuestion.execute("");
+                }
+                else {
+                    counter += 1;
+                }
+            }*/
         }
 
         @Override
