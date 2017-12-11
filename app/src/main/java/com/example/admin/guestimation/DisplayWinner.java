@@ -81,7 +81,7 @@ public class DisplayWinner extends AppCompatActivity {
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
                     {
-                        score = rs.getInt("Score");
+                        score = rs.getInt("Max(Score)");
                         isSuccess = true;
                     }
                     //pulls the users cardToPlay for comparison
