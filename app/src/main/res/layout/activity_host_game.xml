@@ -48,6 +48,7 @@
             android:id="@+id/disclaimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text='Ensure you have given the Game Password to all players before clicking "Login"'
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -468,7 +468,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="*Scores do not reflect the most recent answer"
+                android:text="*Scores do not reflect the most recent answer*"
                 android:textSize="14sp" />
         </LinearLayout>
 

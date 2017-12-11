@@ -15,13 +15,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DisplayWinner extends AppCompatActivity {
 
     public Connection con;
-    public TextView displayWinner;
+    public TextView displayWinner, displayWinner1, displayWinner2;
     public Button back;
-    String username, gamePass, isAdmin, winner;
+    public String username, gamePass, isAdmin, winner;
+    public ArrayList<String> winners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class DisplayWinner extends AppCompatActivity {
         back.setVisibility(View.INVISIBLE);
         displayWinner = findViewById(R.id.displayWinner);
         displayWinner.setVisibility(View.INVISIBLE);
+        displayWinner1 = findViewById(R.id.displayWinner1);
+        displayWinner1.setVisibility(View.INVISIBLE);
+        displayWinner2 = findViewById(R.id.displayWinner2);
+        displayWinner2.setVisibility(View.INVISIBLE);
 
         CheckWinner checkWinner = new CheckWinner();
         checkWinner.execute("");
@@ -72,8 +78,26 @@ public class DisplayWinner extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            displayWinner.setText(winner);
-            displayWinner.setVisibility(View.VISIBLE);
+            if (winners.size() >= 3)
+            {
+                displayWinner.setText(winners.get(0));
+                displayWinner.setVisibility(View.VISIBLE);
+                displayWinner1.setText(winners.get(1));
+                displayWinner1.setVisibility(View.VISIBLE);
+                displayWinner2.setText(winners.get(3));
+                displayWinner2.setVisibility(View.VISIBLE);
+            }
+            if (winners.size() == 2)
+            {
+                displayWinner.setText(winners.get(0));
+                displayWinner.setVisibility(View.VISIBLE);
+                displayWinner1.setText(winners.get(1));
+                displayWinner1.setVisibility(View.VISIBLE);
+            }
+            else {
+                displayWinner.setText(winners.get(0));
+                displayWinner.setVisibility(View.VISIBLE);
+            }
             back.setVisibility(View.VISIBLE);
         }
 
@@ -101,9 +125,10 @@ public class DisplayWinner extends AppCompatActivity {
                     //pulls the users cardToPlay for comparison
                     String query2 = "select Nickname from Player where GameID='" + gamePass + "' and Score=" + score + "";
                     ResultSet rs1 = stmt.executeQuery(query2);
-                    if (rs1.next())
+                    while (rs1.next())
                     {
                         winner = rs1.getString("Nickname");
+                        winners.add(winner);
                     }
                     con.close();
                 }
