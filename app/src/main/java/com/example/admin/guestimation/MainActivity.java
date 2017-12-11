@@ -376,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String query = "select cardToPlay from Player where nickname='" + username + "'";
+                    String query = "select cardToPlay from Player where nickname='" + username + "' and GameID='" + gamePass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next())
