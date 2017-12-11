@@ -127,6 +127,8 @@ public class ScoreActivity extends AppCompatActivity {
         checkQuestion.execute("");
     }
 
+    //this method, combined with the CheckQuestion method basically creates a while loop, that assures all of the instances in onCard are the same,
+    //or in a functional description, all users have answered the same question
     public String WaitforResponse() {
         int counter = 0;
         while (counter < onCard.size()) {

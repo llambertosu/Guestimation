@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class Homepage extends AppCompatActivity{
 
-    public Button onHostPressed, joinButton;
+    public Button onHostPressed, joinButton, questionsButton;
 
     @Override
     public void onCreate (Bundle savedInstanceState){
@@ -21,6 +21,7 @@ public class Homepage extends AppCompatActivity{
 
         onHostPressed = findViewById(R.id.onHostPressed);
         joinButton = findViewById(R.id.joinButton);
+        questionsButton = findViewById(R.id.questionsButton);
 
         onHostPressed.setOnClickListener(new View.OnClickListener()
         {
@@ -35,8 +36,17 @@ public class Homepage extends AppCompatActivity{
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), UserLogin.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(), UserLogin.class);
+                startActivity(intent2);
+            }
+        });
+
+        questionsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(getApplicationContext(), QuestionsActivity.class);
+                startActivity(intent3);
             }
         });
     }

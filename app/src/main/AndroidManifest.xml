@@ -24,7 +24,8 @@
         <activity android:name=".HostGame" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ScoreActivity" />
-        <activity android:name=".DisplayWinner"></activity>
+        <activity android:name=".DisplayWinner" />
+        <activity android:name=".QuestionsActivity"></activity>
     </application>
 
 </manifest>
