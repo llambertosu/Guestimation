@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The winner is:"
+            android:gravity="center"
             android:textSize="24sp" />
 
         <TextView
@@ -23,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
+            android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
