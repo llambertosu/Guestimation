@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -89,7 +88,7 @@ public class DisplayWinner extends AppCompatActivity {
                     ResultSet rs1 = stmt.executeQuery(query2);
                     if (rs1.next())
                     {
-                        winner = rs1.getString("cardToPlay");
+                        winner = rs1.getString("Nickname");
                     }
                     con.close();
                 }
@@ -149,8 +148,6 @@ public class DisplayWinner extends AppCompatActivity {
             }
             return z;
         }
-
-
     }
 
     @SuppressLint("NewApi")

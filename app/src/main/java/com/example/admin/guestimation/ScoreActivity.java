@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -32,7 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView correctAnswer;
     public ProgressBar progressBar;
 
-    String username, gamePass, isAdmin;
+    String username, gamePass, isAdmin, finalCard;
     //sets arrays for displaying responses, usernames, and scores
     ArrayList<Integer> onCard = new ArrayList<>();
     ArrayList<String> responses = new ArrayList<>();
@@ -50,7 +48,14 @@ public class ScoreActivity extends AppCompatActivity {
         username = getMainIntent.getStringExtra("username");
         gamePass = getMainIntent.getStringExtra("gamePass");
         isAdmin = getMainIntent.getStringExtra("isAdmin");
-        card = Integer.parseInt(getMainIntent.getStringExtra("lastCardPlayed")) - 1;
+        finalCard = getMainIntent.getStringExtra("finalCard");
+        if (finalCard.equals("N")) {
+            card = Integer.parseInt(getMainIntent.getStringExtra("lastCardPlayed")) - 1;
+        }
+        else
+        {
+            card = Integer.parseInt(getMainIntent.getStringExtra("lastCardPlayed"));
+        }
 
         progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
@@ -256,7 +261,8 @@ public class ScoreActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.INVISIBLE);
                 correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
-                if (card != 9) {
+                if (finalCard.equals("N"))
+                {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {

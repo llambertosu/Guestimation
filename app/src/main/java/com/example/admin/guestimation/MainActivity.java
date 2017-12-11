@@ -105,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess)
             {
-                int ten = 10;
-                String sendTen = Integer.toString(ten);
                 UpdateCard updateCard = new UpdateCard();
                 updateCard.execute("");
                 //Creates the intent to pass variables to the ScoreActivity class
@@ -116,9 +114,12 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("isAdmin", isAdmin);
                 if (nextCard.equals(10))
                 {
-                    intent.putExtra("lastCardPlayed", sendTen);
+                    intent.putExtra("finalCard", "Y");
+                    intent.putExtra("lastCardPlayed", Integer.toString(cards.get(9)));
                 }
-                else {
+                else
+                {
+                    intent.putExtra("finalCard", "N");
                     intent.putExtra("lastCardPlayed", Integer.toString(cards.get(nextCard)));
                 }
                 //closes the MainActivity so it can be reused later
