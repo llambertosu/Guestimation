@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
     public TextView response1, response2, response3, response4, response5, response6, response7, response8, response9, response10;
     public TextView score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
     public TextView correctAnswer;
+    public ProgressBar progressBar;
 
     String username, gamePass, isAdmin;
     //sets arrays for displaying responses, usernames, and scores
@@ -50,6 +52,8 @@ public class ScoreActivity extends AppCompatActivity {
         isAdmin = getMainIntent.getStringExtra("isAdmin");
         card = Integer.parseInt(getMainIntent.getStringExtra("lastCardPlayed")) - 1;
 
+        progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.VISIBLE);
         correctAnswer = findViewById(R.id.correctAnswer);
         correctAnswer.setVisibility(View.INVISIBLE);
         score1 = findViewById(R.id.score1);
@@ -249,6 +253,7 @@ public class ScoreActivity extends AppCompatActivity {
             if (isSuccess = true)
             {
                 //sets the correctAnswer textview
+                progressBar.setVisibility(View.INVISIBLE);
                 correctAnswer.setText(Integer.toString(answer));
                 correctAnswer.setVisibility(View.VISIBLE);
                 if (card != 9) {
