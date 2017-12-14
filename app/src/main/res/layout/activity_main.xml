@@ -52,6 +52,12 @@
             tools:layout_editor_absoluteY="294dp"
             tools:ignore="OnClick" />
 
+        <TextView
+            android:id="@+id/gamePassView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

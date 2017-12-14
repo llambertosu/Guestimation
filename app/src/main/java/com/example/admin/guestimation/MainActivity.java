@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     //Declaring layout button, edit texts
     public EditText answer;
     public Button submit;
-    public TextView question;
+    public TextView question, gamePassView;
     public ProgressBar progressBar;
 
     //Declaring connection variables
@@ -45,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
         isAdmin = intent.getStringExtra("isAdmin");
 
         //Get values from the button, ExitText, and TextView
+        gamePassView = findViewById(R.id.gamePassView);
         answer = findViewById(R.id.answerBox);
         submit = findViewById(R.id.submitButton);
         question = findViewById(R.id.questionView);
         progressBar = findViewById(R.id.progressBar);
+
+        String gamePassDesc = "The Game Password is: ";
+        gamePassView.setText(gamePassDesc + gamePass);
 
         //Declare Server ip, username, database name, and password
         ip = "guestimation.database.windows.net:1433";
