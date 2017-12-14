@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -183,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -220,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -237,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -246,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -256,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -273,7 +273,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -281,7 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -291,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -309,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -317,7 +317,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -327,7 +327,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -344,7 +344,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textSize="16sp" />
 
             <TextView
@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -363,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -381,7 +381,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/response10"
@@ -389,7 +389,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center" />
 
             <TextView
@@ -398,7 +398,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center" />
 
         </LinearLayout>

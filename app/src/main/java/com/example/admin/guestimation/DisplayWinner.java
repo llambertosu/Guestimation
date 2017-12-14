@@ -22,8 +22,9 @@ public class DisplayWinner extends AppCompatActivity {
     public Connection con;
     public TextView displayWinner, displayWinner1, displayWinner2;
     public Button back;
-    public String username, gamePass, isAdmin, winner;
-    public ArrayList<String> winners;
+
+    String username, gamePass, isAdmin;
+    ArrayList<String> winners = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,6 @@ public class DisplayWinner extends AppCompatActivity {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
-        int score;
 
         protected void onPreExecute()
         {
@@ -114,13 +114,12 @@ public class DisplayWinner extends AppCompatActivity {
                 else
                 {
                     //pulls the users cardToPlay for comparison
-                    String query = "Select nickname from player where GameID='" + gamePass + "' and Score=(Select Max(Score) from Player where GameID='" + gamePass + "') ";
+                    String query = "Select Nickname from player where GameID='" + gamePass + "' and Score=(Select Max(Score) from Player where GameID='" + gamePass + "')";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next())
                     {
-                        winner = rs.getString("Nickname");
-                        winners.add(winner);
+                        winners.add(rs.getString("Nickname"));
                     }
                     con.close();
                 }
