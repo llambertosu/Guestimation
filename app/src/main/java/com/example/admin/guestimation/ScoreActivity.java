@@ -221,10 +221,18 @@ public class ScoreActivity extends AppCompatActivity {
             int counter = 0;
             while (counter < responses.size())
             {
-                if (answer - Integer.parseInt(responses.get(counter)) < answer - winner && answer - Integer.parseInt(responses.get(counter)) >= 0)
-                {
-                    winner = Integer.parseInt(responses.get(counter));
+                if(winner != 9999) {
+                    if (answer - Integer.parseInt(responses.get(counter)) < answer - winner && answer - Integer.parseInt(responses.get(counter)) >= 0) {
+                        winner = Integer.parseInt(responses.get(counter));
+                    }
                 }
+                else
+                {
+                    if (answer - Integer.parseInt(responses.get(counter)) < winner && answer - Integer.parseInt(responses.get(counter)) >= 0) {
+                        winner = Integer.parseInt(responses.get(counter));
+                    }
+                }
+
                 counter += 1;
             }
         }
